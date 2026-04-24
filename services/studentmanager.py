@@ -1,9 +1,10 @@
 import json
-from student import Student
+from models.student import Student
 
 class StudentManager():
     def __init__(self):
         self.students = {}
+        self.filename = "data/student.json"
 
     def add_student(self, student: Student):
         if not isinstance(student, Student):
@@ -12,13 +13,13 @@ class StudentManager():
         if student.student_id in self.students:
             raise ValueError(f"Student with ID {student.student_id} already exists")
         self.students[student.student_id] = student
-        return True
 
-    def find_student(self, student_id: int) -> Student | None:
+
+    def find_student(self, student_id: str) -> Student | None:
         return self.students.get(student_id)
     
 
-    def update_student(self, student_id: int, name=None, age=None):
+    def update_student(self, student_id: str, name=None, age=None):
         if name is None and age is None:
             raise ValueError("No update data provided")
         
@@ -36,28 +37,30 @@ class StudentManager():
         return student
 
 
-    def delete_student(self, student_id):
+    def delete_student(self, student_id: str):
         if student_id not in self.students:
             raise ValueError(f"Student with ID {student_id} not found")
         del self.students[student_id]
-        return True
     
 
     def get_all_students(self):
         return list(self.students.values())
     
 
-    def save_to_file(self, filename):
+    def save_to_file(self):
         data = [s.to_dict() for s in self.students.values()]
-        with open(filename, "w") as file:
+        with open(self.filename, "w") as file:
             json.dump(data, file, indent=4)
     
 
-    def load_from_file(self, filename):
+    def load_from_file(self):
         try:
-            with open(filename, "r") as f:
+            with open(self.filename, "r") as f:
                 data = json.load(f)
                 self.students = {d["student_id"]: Student.from_dict(d) for d in data}
 
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError:
             self.students = {}
+
+        except json.JSONDecodeError:
+            raise ValueError("File is corrupted")

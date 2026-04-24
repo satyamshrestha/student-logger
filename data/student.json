@@ -1,0 +1,27 @@
+[
+    {
+        "student_id": "1",
+        "name": "Satyam",
+        "age": 18
+    },
+    {
+        "student_id": "2",
+        "name": "Milan",
+        "age": 19
+    },
+    {
+        "student_id": "3",
+        "name": "Deepson",
+        "age": 19
+    },
+    {
+        "student_id": "4",
+        "name": "Sandesh",
+        "age": 19
+    },
+    {
+        "student_id": "5",
+        "name": "Sameer",
+        "age": 19
+    }
+]
