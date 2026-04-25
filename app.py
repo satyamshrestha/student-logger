@@ -66,17 +66,3 @@ def update_student(student_id: str, data: StudentUpdate):
     
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
-
-def get_valid_age(prompt):
-    while True:
-        try:    
-            return int(input(prompt))
-        except ValueError:
-            print("Age must be an integer!")
-
-def get_valid_name(prompt):
-    while True:
-        name = input(prompt).strip()
-        if name:
-            return name
-        print("Name cannot be empty!")
