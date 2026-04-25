@@ -20,7 +20,10 @@ def create_student(data: StudentCreate):
     try:
         manager.add_student(Student(data.student_id, data.name, data.age))
         manager.save_to_file()
-        return {"message": "Student created successfully!"}
+        return {
+            "message": "Student created successfully!",
+            "student": data
+        }
 
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -40,6 +43,10 @@ def get_student(student_id: str):
     
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+@app.get("/students/count")
+def get_student_count():
+    return {"count": len(manager.get_all_students())}
 
 @app.delete("/students/{student_id}")
 def delete_student(student_id: str):
