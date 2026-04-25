@@ -23,15 +23,12 @@ def create_student(data: StudentCreate):
         return {"message": "Student created successfully!"}
 
     except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e))
+    
 @app.get("/students")
 def get_students():
-    try:
-        students = manager.get_all_students()
-        return [s.to_dict for s in students]
-
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+    students = manager.get_all_students()
+    return [s.to_dict() for s in students]
 
 @app.get("/students/{student_id}")
 def get_student(student_id: str):
