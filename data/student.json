@@ -16,12 +16,7 @@
     },
     {
         "student_id": "4",
-        "name": "Sandesh",
-        "age": 19
-    },
-    {
-        "student_id": "5",
-        "name": "Sameer",
-        "age": 19
+        "name": "Sushant",
+        "age": 20
     }
 ]
