@@ -1,5 +1,5 @@
 from models.student import Student
-from services.studentmanager import StudentManager
+from services.studentservice import StudentManager
 
 def main():
     print("Starting Student Management System...")
