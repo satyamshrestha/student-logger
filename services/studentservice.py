@@ -32,6 +32,9 @@ class StudentService():
         db.commit()
         db.refresh(student)
         return student
+    
+    def count_students(self, db):
+        return db.query(Student).count()
 
     def delete_student(self, db, student_id: str):
         student = self.find_student(db, student_id)
@@ -39,7 +42,7 @@ class StudentService():
             raise ValueError(f"Student with ID {student_id} not found!")
         
         db.delete(student)
-        db.commit()    
+        db.commit()
         return True
 
     def get_all_students(self, db):
