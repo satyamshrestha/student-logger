@@ -45,5 +45,25 @@ class StudentService():
         db.commit()
         return True
 
-    def get_all_students(self, db):
-        return db.query(Student).all()
+    def get_all_students(self, db, age=None, min_age=None, max_age=None, name=None, sort=None, order="asc", limit=10, offset=0):
+        query = db.query(Student)
+        # Filtering
+        if age is not None:
+            query = query.filter(Student.age == age)
+        else:
+            if min_age is not None:
+                query = query.filter(Student.age >= min_age)
+            if max_age is not None:
+                query = query.filter(Student.age <= max_age)
+        if name is not None:
+            query = query.filter(Student.name.ilike(f"%{name}%"))
+        
+        # Sorting
+        if sort == "age":
+            if order == "desc":
+                query = query.order_by(Student.age.desc())
+            else: 
+                query = query.order_by(Student.age)
+    
+        # Pagination
+        return query.offset(offset).limit(limit).all()
