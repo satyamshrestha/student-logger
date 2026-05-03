@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from models.student import Student
 from models.course import Course
 from services.studentservice import StudentService
-from schemas.student_schema import StudentCreate, StudentUpdate, StudentResponse, CourseCreate, CourseResponse
+from schemas.student_schema import StudentQuery, StudentCreate, StudentUpdate, StudentResponse, CourseCreate, CourseResponse
 from services.courseservice import CourseService
 from db.database import Base, engine
 from db.deps import get_db
@@ -26,18 +26,8 @@ def create_student(data: StudentCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
     
 @app.get("/students", response_model=list[StudentResponse])
-def get_students(
-    age: int | None = None, 
-    min_age: int | None = None,
-    max_age: int | None = None,
-    name: str | None = None,
-    sort: str | None = None,
-    order: str = "asc",
-    limit: int = Query(10, ge=1, le=100),
-    offset: int = 0,
-    db: Session = Depends(get_db)
-    ):
-    return service.get_all_students(db, age, min_age, max_age, name, sort, order, limit, offset)
+def get_students(db: Session = Depends(get_db), query: StudentQuery = Depends()):
+    return service.get_all_students(db, query)
 
 @app.get("/students/count")
 def get_student_count(db: Session = Depends(get_db)):
