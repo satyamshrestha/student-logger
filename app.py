@@ -8,6 +8,7 @@ from schemas.student_schema import StudentQuery, StudentCreate, StudentUpdate, S
 from services.courseservice import CourseService
 from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
+from auth.deps import get_current_user
 from db.database import Base, engine
 from db.deps import get_db
 
@@ -51,7 +52,7 @@ def create_student(data: StudentCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
     
 @app.get("/students", response_model=list[StudentResponse])
-def get_students(db: Session = Depends(get_db), query: StudentQuery = Depends()):
+def get_students(user: str = Depends(get_current_user),db: Session = Depends(get_db), query: StudentQuery = Depends()):
     return service.get_all_students(db, query)
 
 @app.get("/students/count")

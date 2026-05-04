@@ -1,3 +1,6 @@
+# ---CLI-BASED STUDENT MANAGEMENT SYSTEM---
+# THIS IS NOT THE MAIN FILE FOR THE API. THIS IS A SEPARATE CLI-BASED APP FOR MANAGING STUDENTS LOCALLY. THE API IS IN app.py
+
 from models.student import Student
 from services.studentservice import StudentManager
 
