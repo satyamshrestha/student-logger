@@ -2,9 +2,12 @@ from fastapi import FastAPI, HTTPException, Depends, Query
 from sqlalchemy.orm import Session
 from models.student import Student
 from models.course import Course
+from models.user import User
 from services.studentservice import StudentService
-from schemas.student_schema import StudentQuery, StudentCreate, StudentUpdate, StudentResponse, CourseCreate, CourseResponse
+from schemas.student_schema import StudentQuery, StudentCreate, StudentUpdate, StudentResponse, CourseCreate, CourseResponse, UserCreate, UserLogin
 from services.courseservice import CourseService
+from utils.security import hash_password, verify_password
+from utils.jwt import create_access_token
 from db.database import Base, engine
 from db.deps import get_db
 
@@ -15,6 +18,28 @@ service = StudentService()
 @app.get("/")
 def home():
     return {"message": "API is running"}
+
+@app.post("/signup")
+def signup(data: UserCreate, db: Session = Depends(get_db)):
+    if db.query(User).filter(User.username == data.username).first():
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    user = User(username=data.username, password=hash_password(data.password))
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return {"message": "User created successfully!"}
+
+@app.post("/login")
+def login(data: UserLogin, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.username == data.username).first()
+
+    if not user or not verify_password(data.password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    token = create_access_token({"sub": user.username})
+
+    return {"access_token": token}
 
 @app.post("/students", status_code=201, response_model=StudentResponse)
 def create_student(data: StudentCreate, db: Session = Depends(get_db)):
