@@ -43,9 +43,11 @@ class CourseResponse(BaseModel):
 
 class UserCreate(BaseModel):
     username: str
-    role: str
     password: str
 
 class UserLogin(BaseModel):
     username: str
     password: str
+
+class RoleUpdate(BaseModel):
+    role: str
