@@ -7,4 +7,7 @@ security = HTTPBearer()
 
 def get_current_user(token = Depends(security)):
     payload = jwt.decode(token.credentials, SECRET_KEY, algorithms=["HS256"])
-    return payload["sub"]
+    return {
+        "username": payload["sub"],
+        "role": payload.get("role")
+    }
