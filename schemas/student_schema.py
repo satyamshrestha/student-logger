@@ -43,7 +43,7 @@ class CourseResponse(BaseModel):
 
 class UserCreate(BaseModel):
     username: str
-    role: str = "student"
+    role: str
     password: str
 
 class UserLogin(BaseModel):
