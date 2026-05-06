@@ -19,12 +19,12 @@ class StudentService():
 
     def update_student(self, db, student_id: str, name=None, age=None):
         if name is None and age is None:
-            raise ValueError("No update data provided")
+            raise AppException("No update data provided", 400)
         
         student = self.find_student(db, student_id)
 
         if not student:
-            raise ValueError(f"Student with ID {student_id} not found")
+            raise AppException(f"Student with ID {student_id} not found", 404)
         
         if name is not None:
             student.name = name
