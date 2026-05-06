@@ -7,6 +7,8 @@ from utils.exceptions import AppException
 from auth.deps import get_current_user
 from auth.permissions import require_permission
 from schemas.student_schema import RoleUpdate
+from services.userservice import UserService
+from services.deps import get_user_service
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -17,23 +19,17 @@ def get_me(user: dict = Depends(get_current_user)):
 @router.get("")
 def get_all_users(
     user: dict = Depends(require_permission("admin_only")),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    service: UserService = Depends(get_user_service)
 ):
-    return db.query(User).all()
+    return service.get_all_users(db)
 
 @router.put("/{username}/role")
 def update_role(
     username: str,
     data: RoleUpdate,
     user: dict = Depends(require_permission("admin_only")),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    service: UserService = Depends(get_user_service)
 ):
-    target_user = db.query(User).filter(User.username == username).first()
-
-    if not target_user:
-        raise AppException("User not found!", 404)
-
-    target_user.role = data.role
-    db.commit()
-
-    return {"message": f"{username} role updated to {data.role}!"}
+    return service.update_role(db, username, data)

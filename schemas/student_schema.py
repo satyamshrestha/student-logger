@@ -24,7 +24,7 @@ class StudentResponse(BaseModel):
     student_id: str
     name: str
     age: int
-    courses: list[CourseResponse] = []
+    courses: list[CourseResponse] = Field(default_factory=list)
 
     class Config:
         from_attributes = True
@@ -50,4 +50,4 @@ class UserLogin(BaseModel):
     password: str
 
 class RoleUpdate(BaseModel):
-    role: str
+    role: Literal["admin", "teacher", "student"]

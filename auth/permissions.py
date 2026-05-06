@@ -11,6 +11,8 @@ def require_permission(permission: str):
     def checker(user: dict = Depends(get_current_user)):
         role = user.get("role")
         allowed_permissions = ROLE_PERMISSIONS.get(role, [])
+        if role not in ROLE_PERMISSIONS:
+            raise HTTPException(status_code=403, detail="Invalid role")
 
         if permission not in allowed_permissions:
             raise HTTPException(status_code=403, detail="You do not have permission to perform this action!")

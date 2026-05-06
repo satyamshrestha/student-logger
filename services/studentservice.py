@@ -4,7 +4,10 @@ from utils.exceptions import AppException
 class StudentService():
 
     def find_student(self, db, student_id: str) -> Student | None:
-        return db.query(Student).filter(Student.student_id == student_id).first()
+        student = db.query(Student).filter(Student.student_id == student_id).first()
+        if not student:
+            raise AppException(f"Student with the id {student_id} not found!", 404)
+        return student    
 
     def add_student(self, db, data):
         if self.find_student(db, data.student_id):

@@ -25,7 +25,7 @@ def signup(
     )
     db.add(user)
     db.commit()
-    db.refresh()
+    db.refresh(user)
     return {"message": "User created successfully!"}
 
 @router.post("/login")

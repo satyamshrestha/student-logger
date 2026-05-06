@@ -9,7 +9,7 @@ from auth.permissions import require_permission
 
 router = APIRouter(prefix="/students", tags=["Students"])
 
-@router.post("", response_model=StudentCreate)
+@router.post("", response_model=StudentResponse)
 def create_student(
     data: StudentCreate,
     service: StudentService = Depends(get_student_service),
