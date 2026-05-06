@@ -1,4 +1,5 @@
 from models.student import Student
+from utils.exceptions import AppException
 
 class StudentService():
 
@@ -6,9 +7,10 @@ class StudentService():
         return db.query(Student).filter(Student.student_id == student_id).first()
 
     def add_student(self, db, data):
+        if self.find_student(db, data.student_id):
+            raise AppException(f"Student with ID {data.student_id} already exists", 400)
+        
         student = Student(**data.model_dump())        
-        if self.find_student(db, student.student_id):
-            raise ValueError(f"Student with ID {student.student_id} already exists")
         
         db.add(student)
         db.commit()
@@ -40,7 +42,7 @@ class StudentService():
     def delete_student(self, db, student_id: str):
         student = self.find_student(db, student_id)
         if not student:
-            raise ValueError(f"Student with ID {student_id} not found!")
+            raise AppException(f"Student with ID {student_id} not found!", 404)
         
         db.delete(student)
         db.commit()
