@@ -5,7 +5,8 @@ class StudentService():
     def find_student(self, db, student_id: str) -> Student | None:
         return db.query(Student).filter(Student.student_id == student_id).first()
 
-    def add_student(self, db, student: Student):        
+    def add_student(self, db, data):
+        student = Student(**data.model_dump())        
         if self.find_student(db, student.student_id):
             raise ValueError(f"Student with ID {student.student_id} already exists")
         

@@ -46,9 +46,7 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
 @app.post("/students", status_code=201, response_model=StudentResponse)
 def create_student(data: StudentCreate, user: dict = Depends(require_permission("create")), db: Session = Depends(get_db)):
     try:
-        student = Student(**data.model_dump())
-        return service.add_student(db, student)
-
+        return service.add_student(db, data)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
@@ -96,8 +94,7 @@ def update_student(student_id: str, data: StudentUpdate, user: dict = Depends(re
 @app.post("/courses", response_model=CourseResponse)
 def create_course(data: CourseCreate, user: dict = Depends(require_permission("create")), db: Session = Depends(get_db)):
     try:
-        course = Course(**data.model_dump())
-        return CourseService().add_course(db, course)
+        return CourseService().add_course(db, data)
     
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
