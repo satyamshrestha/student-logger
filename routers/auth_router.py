@@ -7,6 +7,7 @@ from schemas.student_schema import UserCreate, UserLogin
 from utils.exceptions import AppException
 from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
+from utils.logger import logger
 
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
@@ -34,9 +35,13 @@ def login(
     db: Session = Depends(get_db)
 ):
     user = db.query(User).filter(User.username == data.username).first()
+    logger.info(f"Login attempt for user: {data.username}.")
 
     if not user or not verify_password(data.password, user.password):
-        raise AppException("Invalid credentials", 401)
+        logger.warning(f"Failed login attempt for user: {data.username}.")
+        raise AppException("Invalid credentials!", 401)
+    
+    logger.info(f"User {user.username} logged in successfully.")
 
     token = create_access_token({"sub": user.username, "role": user.role})
 
