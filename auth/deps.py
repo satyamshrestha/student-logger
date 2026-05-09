@@ -10,13 +10,13 @@ def get_current_user(token = Depends(security)):
     try:
         payload = jwt.decode(token.credentials, SECRET_KEY, algorithms=["HS256"])
         if not payload.get("sub"):
-            raise HTTPException(status_code=401, detail="Invalid token payload")
+            raise HTTPException(status_code=401, detail="Invalid token payload!")
 
         if not payload.get("role"):
-            raise HTTPException(status_code=401, detail="Role missing in token")
+            raise HTTPException(status_code=401, detail="Role missing in token!")
         
     except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
+        raise HTTPException(status_code=401, detail="Invalid or expired token!")
     
     return {
         "username": payload.get("sub"),
