@@ -2,13 +2,22 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 
 from db.database import Base, engine
 from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Application starting up...")
+
+    yield
+    
+    logger.info("Application shutting down...")
+
+app = FastAPI(lifespan=lifespan)
 Base.metadata.create_all(engine)
 
 app.include_router(api_router, prefix="/api/v1")

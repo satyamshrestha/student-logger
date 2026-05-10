@@ -30,3 +30,9 @@
 2026-05-10 18:10:08,760 | INFO | Completed request: GET http://127.0.0.1:8000/ | Status: 200 | Duration: 0.0018s
 2026-05-10 18:10:34,586 | INFO | Incoming request: GET http://127.0.0.1:8000/users
 2026-05-10 18:10:34,587 | INFO | Completed request: GET http://127.0.0.1:8000/users | Status: 401 | Duration: 0.0010s
+2026-05-10 19:33:22,060 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-10 19:33:22,062 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0026s
+2026-05-10 19:33:22,263 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-10 19:33:22,287 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0243s
+2026-05-10 19:43:30,276 | INFO | Application starting up...
+2026-05-10 19:43:36,770 | INFO | Application shutting down...
