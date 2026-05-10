@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Request
 import time
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from db.database import Base, engine
 from utils.exceptions import AppException
@@ -36,7 +37,15 @@ async def log_requests(request: Request, call_next):
         f"Duration: {duration:.4f}s"
     )
 
-    return response
+    return response  
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # Global exception handler for AppException
 @app.exception_handler(AppException)
