@@ -1,0 +1,32 @@
+2026-05-10 18:07:17,956 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-10 18:07:17,959 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0030s
+2026-05-10 18:07:18,325 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-10 18:07:18,350 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0249s
+2026-05-10 18:07:32,220 | INFO | Incoming request: POST http://127.0.0.1:8000/auth/login
+2026-05-10 18:07:32,235 | INFO | Login attempt for user: satyam.
+2026-05-10 18:07:32,537 | INFO | User satyam logged in successfully.
+2026-05-10 18:07:32,539 | INFO | Completed request: POST http://127.0.0.1:8000/auth/login | Status: 200 | Duration: 0.3187s
+2026-05-10 18:08:10,399 | INFO | Incoming request: GET http://127.0.0.1:8000/users/me
+2026-05-10 18:08:10,401 | INFO | Completed request: GET http://127.0.0.1:8000/users/me | Status: 200 | Duration: 0.0029s
+2026-05-10 18:08:17,521 | INFO | Incoming request: GET http://127.0.0.1:8000/users
+2026-05-10 18:08:17,527 | INFO | Completed request: GET http://127.0.0.1:8000/users | Status: 200 | Duration: 0.0062s
+2026-05-10 18:08:31,398 | INFO | Incoming request: PUT http://127.0.0.1:8000/users/satyan/role
+2026-05-10 18:08:31,406 | INFO | Completed request: PUT http://127.0.0.1:8000/users/satyan/role | Status: 404 | Duration: 0.0078s
+2026-05-10 18:08:46,850 | INFO | Incoming request: POST http://127.0.0.1:8000/students
+2026-05-10 18:08:46,860 | INFO | Completed request: POST http://127.0.0.1:8000/students | Status: 400 | Duration: 0.0097s
+2026-05-10 18:08:57,400 | INFO | Incoming request: GET http://127.0.0.1:8000/students?age=100&order=asc&limit=10&offset=0
+2026-05-10 18:08:57,409 | INFO | Completed request: GET http://127.0.0.1:8000/students?age=100&order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0090s
+2026-05-10 18:09:09,654 | INFO | Incoming request: GET http://127.0.0.1:8000/students/count
+2026-05-10 18:09:09,661 | INFO | Completed request: GET http://127.0.0.1:8000/students/count | Status: 200 | Duration: 0.0071s
+2026-05-10 18:09:16,252 | INFO | Incoming request: GET http://127.0.0.1:8000/students/10
+2026-05-10 18:09:16,258 | INFO | Completed request: GET http://127.0.0.1:8000/students/10 | Status: 404 | Duration: 0.0061s
+2026-05-10 18:09:26,885 | INFO | Incoming request: PUT http://127.0.0.1:8000/students/12
+2026-05-10 18:09:26,890 | INFO | Completed request: PUT http://127.0.0.1:8000/students/12 | Status: 404 | Duration: 0.0048s
+2026-05-10 18:09:36,659 | INFO | Incoming request: DELETE http://127.0.0.1:8000/students/4
+2026-05-10 18:09:36,664 | INFO | Completed request: DELETE http://127.0.0.1:8000/students/4 | Status: 404 | Duration: 0.0052s
+2026-05-10 18:10:00,267 | INFO | Incoming request: POST http://127.0.0.1:8000/courses
+2026-05-10 18:10:00,272 | INFO | Completed request: POST http://127.0.0.1:8000/courses | Status: 404 | Duration: 0.0054s
+2026-05-10 18:10:08,758 | INFO | Incoming request: GET http://127.0.0.1:8000/
+2026-05-10 18:10:08,760 | INFO | Completed request: GET http://127.0.0.1:8000/ | Status: 200 | Duration: 0.0018s
+2026-05-10 18:10:34,586 | INFO | Incoming request: GET http://127.0.0.1:8000/users
+2026-05-10 18:10:34,587 | INFO | Completed request: GET http://127.0.0.1:8000/users | Status: 401 | Duration: 0.0010s
