@@ -5,16 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from db.database import Base, engine
 from utils.exceptions import AppException
-from routers import auth_router, course_router, student_router, user_router
+from api.v1.api import api_router
 from utils.logger import logger
 
 app = FastAPI()
 Base.metadata.create_all(engine)
 
-app.include_router(auth_router.router)
-app.include_router(user_router.router)
-app.include_router(student_router.router)
-app.include_router(course_router.router)
+app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/")
 def home():
