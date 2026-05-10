@@ -1,8 +1,11 @@
-from dotenv import load_dotenv
-import os
+from pydantic_settings import BaseSettings
 
-load_dotenv()
+class Settings(BaseSettings):
+    SECRET_KEY: str
+    DATABASE_URL: str
+    ALGORITHM: str
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-DATABASE_URL = os.getenv("DATABASE_URL")
-ALGORITHM = os.getenv("ALGORITHM")
+    class Config:
+        env_file = ".env"
+    
+settings = Settings()
