@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from db.deps import get_db
@@ -8,6 +8,7 @@ from utils.exceptions import AppException
 from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
 from utils.logger import logger
+from utils.tasks import send_welcome_email
 
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
@@ -15,6 +16,7 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 @router.post("/signup")
 def signup(
     data: UserCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     if db.query(User).filter(User.username == data.username).first():
@@ -23,6 +25,10 @@ def signup(
         username=data.username,
         password=hash_password(data.password),
         role="student"
+    )
+    background_tasks.add_task(
+        send_welcome_email,
+        data.username
     )
     db.add(user)
     db.commit()
