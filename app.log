@@ -56,3 +56,108 @@
 2026-05-10 19:58:38,854 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
 2026-05-10 19:58:38,858 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 200 | Duration: 0.0044s
 2026-05-10 19:59:46,591 | INFO | Application shutting down...
+2026-05-14 23:14:39,088 | INFO | select pg_catalog.version()
+2026-05-14 23:14:39,088 | INFO | [raw sql] {}
+2026-05-14 23:14:39,090 | INFO | select current_schema()
+2026-05-14 23:14:39,091 | INFO | [raw sql] {}
+2026-05-14 23:14:39,094 | INFO | show standard_conforming_strings
+2026-05-14 23:14:39,094 | INFO | [raw sql] {}
+2026-05-14 23:14:39,096 | INFO | BEGIN (implicit)
+2026-05-14 23:14:39,103 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-05-14 23:14:39,104 | INFO | [generated in 0.00087s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-05-14 23:14:39,111 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-05-14 23:14:39,111 | INFO | [cached since 0.008198s ago] {'table_name': 'students', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-05-14 23:14:39,112 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2026-05-14 23:14:39,113 | INFO | [cached since 0.01004s ago] {'table_name': 'courses', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2026-05-14 23:14:39,115 | INFO | 
+CREATE TABLE users (
+	username VARCHAR NOT NULL, 
+	role VARCHAR, 
+	password VARCHAR, 
+	PRIMARY KEY (username)
+)
+
+
+2026-05-14 23:14:39,117 | INFO | [no key 0.00170s] {}
+2026-05-14 23:14:39,137 | INFO | 
+CREATE TABLE students (
+	student_id VARCHAR NOT NULL, 
+	name VARCHAR, 
+	age INTEGER, 
+	PRIMARY KEY (student_id)
+)
+
+
+2026-05-14 23:14:39,138 | INFO | [no key 0.00094s] {}
+2026-05-14 23:14:39,146 | INFO | 
+CREATE TABLE courses (
+	course_id VARCHAR NOT NULL, 
+	title VARCHAR, 
+	student_id VARCHAR, 
+	PRIMARY KEY (course_id), 
+	FOREIGN KEY(student_id) REFERENCES students (student_id)
+)
+
+
+2026-05-14 23:14:39,147 | INFO | [no key 0.00083s] {}
+2026-05-14 23:14:39,158 | INFO | COMMIT
+2026-05-14 23:14:39,180 | INFO | Application starting up...
+2026-05-14 23:20:56,462 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-14 23:20:56,463 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0019s
+2026-05-14 23:20:56,571 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-14 23:20:56,602 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0304s
+2026-05-14 23:21:07,820 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-14 23:21:07,829 | INFO | BEGIN (implicit)
+2026-05-14 23:21:07,832 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-14 23:21:07,832 | INFO | [generated in 0.00068s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-14 23:21:07,837 | INFO | Login attempt for user: satyam.
+2026-05-14 23:21:07,837 | WARNING | Failed login attempt for user: satyam.
+2026-05-14 23:21:07,838 | INFO | ROLLBACK
+2026-05-14 23:21:07,840 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 401 | Duration: 0.0206s
+2026-05-14 23:21:22,262 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/auth/login
+2026-05-14 23:21:22,264 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/auth/login | Status: 405 | Duration: 0.0013s
+2026-05-14 23:23:50,152 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/signup
+2026-05-14 23:23:50,155 | INFO | BEGIN (implicit)
+2026-05-14 23:23:50,155 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-14 23:23:50,156 | INFO | [cached since 162.3s ago] {'username_1': 'satyam', 'param_1': 1}
+2026-05-14 23:23:50,464 | INFO | INSERT INTO users (username, role, password) VALUES (%(username)s, %(role)s, %(password)s)
+2026-05-14 23:23:50,465 | INFO | [generated in 0.00100s] {'username': 'satyam', 'role': 'student', 'password': '$2b$12$8VeBSfBrqXQRQ2nkSvlN0O2Cr2WyBzUh/bS0BTSPGuyxgg9gLscF6'}
+2026-05-14 23:23:50,468 | INFO | COMMIT
+2026-05-14 23:23:50,470 | INFO | BEGIN (implicit)
+2026-05-14 23:23:50,472 | INFO | SELECT users.username, users.role, users.password 
+FROM users 
+WHERE users.username = %(pk_1)s
+2026-05-14 23:23:50,473 | INFO | [generated in 0.00062s] {'pk_1': 'satyam'}
+2026-05-14 23:23:50,475 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 200 | Duration: 0.3226s
+2026-05-14 23:23:55,476 | INFO | Sent welcome email to satyam!
+2026-05-14 23:23:55,478 | INFO | ROLLBACK
+2026-05-14 23:23:59,029 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-14 23:23:59,031 | INFO | BEGIN (implicit)
+2026-05-14 23:23:59,032 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-14 23:23:59,033 | INFO | [cached since 171.2s ago] {'username_1': 'satyam', 'param_1': 1}
+2026-05-14 23:23:59,034 | INFO | Login attempt for user: satyam.
+2026-05-14 23:23:59,244 | INFO | User satyam logged in successfully.
+2026-05-14 23:23:59,244 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.2151s
+2026-05-14 23:23:59,246 | INFO | ROLLBACK
+2026-05-14 23:24:29,532 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-14 23:24:29,536 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 403 | Duration: 0.0038s
+2026-05-14 23:24:39,112 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
+2026-05-14 23:24:39,115 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 403 | Duration: 0.0030s
+2026-05-14 23:24:42,258 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users/me
+2026-05-14 23:24:42,260 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users/me | Status: 200 | Duration: 0.0019s
+2026-05-14 23:32:41,955 | INFO | Application shutting down...
