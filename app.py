@@ -18,8 +18,6 @@ async def lifespan(app: FastAPI):
     logger.info("Application shutting down...")
 
 app = FastAPI(lifespan=lifespan)
-Base.metadata.create_all(engine)
-
 app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/")
