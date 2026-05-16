@@ -16,6 +16,7 @@ def create_student(
     user: dict = Depends(require_permission("create")),
     db: Session = Depends(get_db)
 ):
+    print("CREATE STUDENT HIT")
     return service.add_student(db, data)
 
 @router.get("", response_model=list[StudentResponse])

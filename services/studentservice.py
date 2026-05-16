@@ -3,14 +3,9 @@ from utils.exceptions import AppException
 
 class StudentService():
 
-    def find_student(self, db, student_id: str) -> Student | None:
-        student = db.query(Student).filter(Student.student_id == student_id).first()
-        if not student:
-            raise AppException(f"Student with the id {student_id} not found!", 404)
-        return student    
-
     def add_student(self, db, data):
-        if self.find_student(db, data.student_id):
+        existing_student = db.query(Student).filter(Student.student_id == data.student_id).first()
+        if existing_student:
             raise AppException(f"Student with ID {data.student_id} already exists", 400)
         
         student = Student(**data.model_dump())        
@@ -19,6 +14,12 @@ class StudentService():
         db.commit()
         db.refresh(student)  
         return student 
+
+    def find_student(self, db, student_id: str) -> Student | None:
+        student = db.query(Student).filter(Student.student_id == student_id).first()
+        if not student:
+            raise AppException(f"Student with the id {student_id} not found!", 404)
+        return student    
 
     def update_student(self, db, student_id: str, name=None, age=None):
         if name is None and age is None:

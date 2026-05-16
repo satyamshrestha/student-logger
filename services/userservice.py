@@ -11,4 +11,4 @@ class UserService():
             raise AppException("User not found!", 404)
         user.role = data.role
         db.commit()
-        return {"message": "User updated to {data.role}!"}
+        return {"message": f"User updated to {data.role}!"}

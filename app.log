@@ -183,3 +183,451 @@ WHERE users.username = %(username_1)s
 2026-05-16 14:39:57,816 | INFO | Application shutting down...
 2026-05-16 14:39:59,357 | INFO | Application starting up...
 2026-05-16 14:40:01,097 | INFO | Application shutting down...
+2026-05-16 14:48:24,973 | INFO | Application starting up...
+2026-05-16 14:48:29,041 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/signup
+2026-05-16 14:48:29,102 | INFO | select pg_catalog.version()
+2026-05-16 14:48:29,102 | INFO | [raw sql] {}
+2026-05-16 14:48:29,104 | INFO | select current_schema()
+2026-05-16 14:48:29,104 | INFO | [raw sql] {}
+2026-05-16 14:48:29,105 | INFO | show standard_conforming_strings
+2026-05-16 14:48:29,105 | INFO | [raw sql] {}
+2026-05-16 14:48:29,106 | INFO | BEGIN (implicit)
+2026-05-16 14:48:29,110 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:48:29,110 | INFO | [generated in 0.00050s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 14:48:29,346 | INFO | INSERT INTO users (username, role, password) VALUES (%(username)s, %(role)s, %(password)s)
+2026-05-16 14:48:29,346 | INFO | [generated in 0.00065s] {'username': 'satyam', 'role': 'student', 'password': '$2b$12$c8T/xaUaTY5lHt3qV.ISAOKdO7QO0La6SQBQAUj1HjS9EnNBqL4F.'}
+2026-05-16 14:48:29,348 | INFO | COMMIT
+2026-05-16 14:48:29,351 | INFO | BEGIN (implicit)
+2026-05-16 14:48:29,352 | INFO | SELECT users.username, users.role, users.password 
+FROM users 
+WHERE users.username = %(pk_1)s
+2026-05-16 14:48:29,353 | INFO | [generated in 0.00058s] {'pk_1': 'satyam'}
+2026-05-16 14:48:29,354 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 200 | Duration: 0.3137s
+2026-05-16 14:48:34,356 | INFO | Sent welcome email to satyam!
+2026-05-16 14:48:34,358 | INFO | ROLLBACK
+2026-05-16 14:48:49,670 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 14:48:49,673 | INFO | BEGIN (implicit)
+2026-05-16 14:48:49,673 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:48:49,674 | INFO | [cached since 20.56s ago] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 14:48:49,675 | INFO | Login attempt for user: satyam.
+2026-05-16 14:48:49,889 | INFO | User satyam logged in successfully.
+2026-05-16 14:48:49,890 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.2204s
+2026-05-16 14:48:49,892 | INFO | ROLLBACK
+2026-05-16 14:49:10,317 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 14:49:10,322 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 401 | Duration: 0.0046s
+2026-05-16 14:49:20,591 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-16 14:49:20,594 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 401 | Duration: 0.0032s
+2026-05-16 14:49:47,743 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 14:49:47,745 | INFO | BEGIN (implicit)
+2026-05-16 14:49:47,746 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:49:47,746 | INFO | [cached since 78.64s ago] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 14:49:47,748 | INFO | Login attempt for user: satyam.
+2026-05-16 14:49:47,957 | INFO | User satyam logged in successfully.
+2026-05-16 14:49:47,958 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.2149s
+2026-05-16 14:49:47,959 | INFO | ROLLBACK
+2026-05-16 14:50:04,560 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students/count
+2026-05-16 14:50:04,563 | INFO | BEGIN (implicit)
+2026-05-16 14:50:04,567 | INFO | SELECT count(*) AS count_1 
+FROM (SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students) AS anon_1
+2026-05-16 14:50:04,567 | INFO | [generated in 0.00040s] {}
+2026-05-16 14:50:04,571 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students/count | Status: 200 | Duration: 0.0107s
+2026-05-16 14:50:04,572 | INFO | ROLLBACK
+2026-05-16 14:50:14,003 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-16 14:50:14,010 | INFO | BEGIN (implicit)
+2026-05-16 14:50:14,012 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-16 14:50:14,013 | INFO | [generated in 0.00124s] {'param_1': 10, 'param_2': 0}
+2026-05-16 14:50:14,018 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0159s
+2026-05-16 14:50:14,022 | INFO | ROLLBACK
+2026-05-16 14:50:32,078 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users/me
+2026-05-16 14:50:32,081 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users/me | Status: 200 | Duration: 0.0027s
+2026-05-16 14:50:37,470 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
+2026-05-16 14:50:37,472 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 403 | Duration: 0.0018s
+2026-05-16 14:52:11,572 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 14:52:11,576 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 403 | Duration: 0.0037s
+2026-05-16 14:52:27,404 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 14:52:27,407 | INFO | BEGIN (implicit)
+2026-05-16 14:52:27,407 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:52:27,408 | INFO | [cached since 238.3s ago] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 14:52:27,409 | INFO | Login attempt for user: satyam.
+2026-05-16 14:52:27,619 | INFO | User satyam logged in successfully.
+2026-05-16 14:52:27,620 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.2155s
+2026-05-16 14:52:27,621 | INFO | ROLLBACK
+2026-05-16 14:52:46,433 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 14:52:46,438 | INFO | BEGIN (implicit)
+2026-05-16 14:52:46,439 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:52:46,439 | INFO | [generated in 0.00062s] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:52:46,442 | INFO | ROLLBACK
+2026-05-16 14:52:46,445 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0119s
+2026-05-16 14:53:05,136 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-16 14:53:05,140 | INFO | BEGIN (implicit)
+2026-05-16 14:53:05,141 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-16 14:53:05,141 | INFO | [cached since 171.1s ago] {'param_1': 10, 'param_2': 0}
+2026-05-16 14:53:05,145 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0093s
+2026-05-16 14:53:05,148 | INFO | ROLLBACK
+2026-05-16 14:53:08,669 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students/count
+2026-05-16 14:53:08,673 | INFO | BEGIN (implicit)
+2026-05-16 14:53:08,674 | INFO | SELECT count(*) AS count_1 
+FROM (SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students) AS anon_1
+2026-05-16 14:53:08,674 | INFO | [cached since 184.1s ago] {}
+2026-05-16 14:53:08,677 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students/count | Status: 200 | Duration: 0.0081s
+2026-05-16 14:53:08,678 | INFO | ROLLBACK
+2026-05-16 14:53:15,196 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students/1
+2026-05-16 14:53:15,199 | INFO | BEGIN (implicit)
+2026-05-16 14:53:15,199 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:53:15,200 | INFO | [cached since 28.76s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:53:15,202 | INFO | ROLLBACK
+2026-05-16 14:53:15,204 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students/1 | Status: 404 | Duration: 0.0089s
+2026-05-16 14:53:26,574 | INFO | Incoming request: PUT http://127.0.0.1:8000/api/v1/students/1
+2026-05-16 14:53:26,578 | INFO | BEGIN (implicit)
+2026-05-16 14:53:26,580 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:53:26,580 | INFO | [cached since 40.14s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:53:26,584 | INFO | ROLLBACK
+2026-05-16 14:53:26,586 | INFO | Completed request: PUT http://127.0.0.1:8000/api/v1/students/1 | Status: 404 | Duration: 0.0120s
+2026-05-16 14:53:32,787 | INFO | Incoming request: DELETE http://127.0.0.1:8000/api/v1/students/1
+2026-05-16 14:53:32,790 | INFO | BEGIN (implicit)
+2026-05-16 14:53:32,790 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:53:32,790 | INFO | [cached since 46.35s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:53:32,792 | INFO | ROLLBACK
+2026-05-16 14:53:32,794 | INFO | Completed request: DELETE http://127.0.0.1:8000/api/v1/students/1 | Status: 404 | Duration: 0.0071s
+2026-05-16 14:53:51,032 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/courses
+2026-05-16 14:53:51,036 | INFO | BEGIN (implicit)
+2026-05-16 14:53:51,037 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:53:51,038 | INFO | [cached since 64.6s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:53:51,039 | INFO | ROLLBACK
+2026-05-16 14:53:51,042 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/courses | Status: 404 | Duration: 0.0100s
+2026-05-16 14:53:54,535 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users/me
+2026-05-16 14:53:54,537 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users/me | Status: 200 | Duration: 0.0019s
+2026-05-16 14:53:58,847 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
+2026-05-16 14:53:58,850 | INFO | BEGIN (implicit)
+2026-05-16 14:53:58,851 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users
+2026-05-16 14:53:58,851 | INFO | [generated in 0.00043s] {}
+2026-05-16 14:53:58,853 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 200 | Duration: 0.0057s
+2026-05-16 14:53:58,854 | INFO | ROLLBACK
+2026-05-16 14:54:19,835 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 14:54:19,837 | INFO | BEGIN (implicit)
+2026-05-16 14:54:19,838 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:54:19,839 | INFO | [cached since 93.4s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:54:19,841 | INFO | ROLLBACK
+2026-05-16 14:54:19,842 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0076s
+2026-05-16 14:55:23,730 | INFO | Application shutting down...
+2026-05-16 14:55:37,532 | INFO | Application starting up...
+2026-05-16 14:55:46,453 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-16 14:55:46,455 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0020s
+2026-05-16 14:55:46,697 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-16 14:55:46,719 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0221s
+2026-05-16 14:55:58,923 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 14:55:58,990 | INFO | select pg_catalog.version()
+2026-05-16 14:55:58,991 | INFO | [raw sql] {}
+2026-05-16 14:55:58,992 | INFO | select current_schema()
+2026-05-16 14:55:58,992 | INFO | [raw sql] {}
+2026-05-16 14:55:58,993 | INFO | show standard_conforming_strings
+2026-05-16 14:55:58,993 | INFO | [raw sql] {}
+2026-05-16 14:55:58,994 | INFO | BEGIN (implicit)
+2026-05-16 14:55:58,996 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:55:58,996 | INFO | [generated in 0.00033s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 14:55:59,000 | INFO | Login attempt for user: satyam.
+2026-05-16 14:55:59,232 | INFO | User satyam logged in successfully.
+2026-05-16 14:55:59,233 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3101s
+2026-05-16 14:55:59,235 | INFO | ROLLBACK
+2026-05-16 14:56:21,048 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 14:56:21,053 | INFO | BEGIN (implicit)
+2026-05-16 14:56:21,054 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 14:56:21,054 | INFO | [generated in 0.00034s] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 14:56:21,058 | INFO | ROLLBACK
+2026-05-16 14:56:21,061 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0122s
+2026-05-16 15:03:42,514 | INFO | Application shutting down...
+2026-05-16 15:03:44,077 | INFO | Application starting up...
+2026-05-16 15:03:44,731 | INFO | Application shutting down...
+2026-05-16 15:03:52,285 | INFO | Application starting up...
+2026-05-16 15:05:22,362 | INFO | Application shutting down...
+2026-05-16 15:05:48,851 | INFO | Application starting up...
+2026-05-16 15:05:51,773 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-16 15:05:51,775 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0013s
+2026-05-16 15:05:52,010 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-16 15:05:52,030 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0202s
+2026-05-16 15:06:10,255 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 15:06:10,320 | INFO | select pg_catalog.version()
+2026-05-16 15:06:10,321 | INFO | [raw sql] {}
+2026-05-16 15:06:10,322 | INFO | select current_schema()
+2026-05-16 15:06:10,323 | INFO | [raw sql] {}
+2026-05-16 15:06:10,324 | INFO | show standard_conforming_strings
+2026-05-16 15:06:10,324 | INFO | [raw sql] {}
+2026-05-16 15:06:10,325 | INFO | BEGIN (implicit)
+2026-05-16 15:06:10,327 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:06:10,327 | INFO | [generated in 0.00043s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 15:06:10,331 | INFO | Login attempt for user: satyam.
+2026-05-16 15:06:10,566 | INFO | User satyam logged in successfully.
+2026-05-16 15:06:10,567 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3116s
+2026-05-16 15:06:10,568 | INFO | ROLLBACK
+2026-05-16 15:06:43,290 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:06:43,295 | INFO | BEGIN (implicit)
+2026-05-16 15:06:43,297 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:06:43,297 | INFO | [generated in 0.00054s] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 15:06:43,301 | INFO | ROLLBACK
+2026-05-16 15:06:43,304 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0145s
+2026-05-16 15:14:49,530 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/courses
+2026-05-16 15:14:49,536 | INFO | BEGIN (implicit)
+2026-05-16 15:14:49,537 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:14:49,538 | INFO | [cached since 486.2s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 15:14:49,542 | INFO | INSERT INTO courses (course_id, title, student_id) VALUES (%(course_id)s, %(title)s, %(student_id)s)
+2026-05-16 15:14:49,543 | INFO | [generated in 0.00062s] {'course_id': '1', 'title': 'AI Computer Engineering', 'student_id': '1'}
+2026-05-16 15:14:49,549 | INFO | COMMIT
+2026-05-16 15:14:49,554 | INFO | BEGIN (implicit)
+2026-05-16 15:14:49,555 | INFO | SELECT courses.course_id, courses.title, courses.student_id 
+FROM courses 
+WHERE courses.course_id = %(pk_1)s
+2026-05-16 15:14:49,556 | INFO | [generated in 0.00065s] {'pk_1': '1'}
+2026-05-16 15:14:49,560 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/courses | Status: 200 | Duration: 0.0298s
+2026-05-16 15:14:49,562 | INFO | ROLLBACK
+2026-05-16 15:15:01,437 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users/me
+2026-05-16 15:15:01,440 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users/me | Status: 200 | Duration: 0.0030s
+2026-05-16 15:15:10,875 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
+2026-05-16 15:15:10,878 | INFO | BEGIN (implicit)
+2026-05-16 15:15:10,879 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users
+2026-05-16 15:15:10,879 | INFO | [generated in 0.00045s] {}
+2026-05-16 15:15:10,881 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 200 | Duration: 0.0066s
+2026-05-16 15:15:10,883 | INFO | ROLLBACK
+2026-05-16 15:15:26,024 | INFO | Incoming request: PUT http://127.0.0.1:8000/api/v1/users/testuser/role
+2026-05-16 15:15:26,028 | INFO | BEGIN (implicit)
+2026-05-16 15:15:26,029 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:15:26,029 | INFO | [cached since 555.7s ago] {'username_1': 'testuser', 'param_1': 1}
+2026-05-16 15:15:26,032 | INFO | UPDATE users SET role=%(role)s WHERE users.username = %(users_username)s
+2026-05-16 15:15:26,032 | INFO | [generated in 0.00045s] {'role': 'teacher', 'users_username': 'testuser'}
+2026-05-16 15:15:26,034 | INFO | COMMIT
+2026-05-16 15:15:26,037 | INFO | Completed request: PUT http://127.0.0.1:8000/api/v1/users/testuser/role | Status: 200 | Duration: 0.0133s
+2026-05-16 15:15:47,588 | INFO | Application shutting down...
+2026-05-16 15:15:49,274 | INFO | Application starting up...
+2026-05-16 15:16:00,155 | INFO | Incoming request: PUT http://127.0.0.1:8000/api/v1/users/testuser/role
+2026-05-16 15:16:00,222 | INFO | select pg_catalog.version()
+2026-05-16 15:16:00,222 | INFO | [raw sql] {}
+2026-05-16 15:16:00,223 | INFO | select current_schema()
+2026-05-16 15:16:00,224 | INFO | [raw sql] {}
+2026-05-16 15:16:00,225 | INFO | show standard_conforming_strings
+2026-05-16 15:16:00,225 | INFO | [raw sql] {}
+2026-05-16 15:16:00,226 | INFO | BEGIN (implicit)
+2026-05-16 15:16:00,229 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:16:00,230 | INFO | [generated in 0.00118s] {'username_1': 'testuser', 'param_1': 1}
+2026-05-16 15:16:00,233 | INFO | COMMIT
+2026-05-16 15:16:00,235 | INFO | Completed request: PUT http://127.0.0.1:8000/api/v1/users/testuser/role | Status: 200 | Duration: 0.0795s
+2026-05-16 15:16:13,678 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:16:13,683 | INFO | BEGIN (implicit)
+2026-05-16 15:16:13,684 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:16:13,685 | INFO | [generated in 0.00048s] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 15:16:13,689 | INFO | ROLLBACK
+2026-05-16 15:16:13,692 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 400 | Duration: 0.0137s
+2026-05-16 15:16:28,708 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:16:28,711 | INFO | BEGIN (implicit)
+2026-05-16 15:16:28,712 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:16:28,712 | INFO | [cached since 15.03s ago] {'student_id_1': '2', 'param_1': 1}
+2026-05-16 15:16:28,714 | INFO | ROLLBACK
+2026-05-16 15:16:28,715 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0074s
+2026-05-16 15:16:56,030 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:16:56,034 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students | Status: 401 | Duration: 0.0036s
+2026-05-16 15:19:48,127 | INFO | Application starting up...
+2026-05-16 15:19:49,408 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-16 15:19:49,410 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0022s
+2026-05-16 15:19:49,640 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-16 15:19:49,660 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0199s
+2026-05-16 15:20:06,777 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:20:06,781 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 401 | Duration: 0.0038s
+2026-05-16 15:20:20,358 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-16 15:20:20,424 | INFO | select pg_catalog.version()
+2026-05-16 15:20:20,424 | INFO | [raw sql] {}
+2026-05-16 15:20:20,425 | INFO | select current_schema()
+2026-05-16 15:20:20,426 | INFO | [raw sql] {}
+2026-05-16 15:20:20,426 | INFO | show standard_conforming_strings
+2026-05-16 15:20:20,426 | INFO | [raw sql] {}
+2026-05-16 15:20:20,427 | INFO | BEGIN (implicit)
+2026-05-16 15:20:20,429 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:20:20,430 | INFO | [generated in 0.00038s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-16 15:20:20,434 | INFO | Login attempt for user: satyam.
+2026-05-16 15:20:20,670 | INFO | User satyam logged in successfully.
+2026-05-16 15:20:20,671 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3129s
+2026-05-16 15:20:20,673 | INFO | ROLLBACK
+2026-05-16 15:20:37,738 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:20:37,742 | INFO | BEGIN (implicit)
+2026-05-16 15:20:37,744 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:20:37,745 | INFO | [generated in 0.00065s] {'student_id_1': '2', 'param_1': 1}
+2026-05-16 15:20:37,749 | INFO | ROLLBACK
+2026-05-16 15:20:37,751 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 404 | Duration: 0.0133s
+2026-05-16 15:25:44,568 | INFO | Application shutting down...
+2026-05-16 15:25:46,195 | INFO | Application starting up...
+2026-05-16 15:25:49,464 | INFO | Application shutting down...
+2026-05-16 15:25:51,004 | INFO | Application starting up...
+2026-05-16 15:26:01,379 | INFO | Application shutting down...
+2026-05-16 15:26:02,872 | INFO | Application starting up...
+2026-05-16 15:26:06,979 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-16 15:26:07,044 | INFO | select pg_catalog.version()
+2026-05-16 15:26:07,044 | INFO | [raw sql] {}
+2026-05-16 15:26:07,045 | INFO | select current_schema()
+2026-05-16 15:26:07,046 | INFO | [raw sql] {}
+2026-05-16 15:26:07,047 | INFO | show standard_conforming_strings
+2026-05-16 15:26:07,047 | INFO | [raw sql] {}
+2026-05-16 15:26:07,048 | INFO | BEGIN (implicit)
+2026-05-16 15:26:07,050 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:26:07,051 | INFO | [generated in 0.00044s] {'student_id_1': '2', 'param_1': 1}
+2026-05-16 15:26:07,055 | INFO | INSERT INTO students (student_id, name, age) VALUES (%(student_id)s, %(name)s, %(age)s)
+2026-05-16 15:26:07,056 | INFO | [generated in 0.00050s] {'student_id': '2', 'name': 'Milan', 'age': 19}
+2026-05-16 15:26:07,058 | INFO | COMMIT
+2026-05-16 15:26:07,061 | INFO | BEGIN (implicit)
+2026-05-16 15:26:07,063 | INFO | SELECT students.student_id, students.name, students.age 
+FROM students 
+WHERE students.student_id = %(pk_1)s
+2026-05-16 15:26:07,064 | INFO | [generated in 0.00055s] {'pk_1': '2'}
+2026-05-16 15:26:07,067 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-16 15:26:07,067 | INFO | [generated in 0.00083s] {'param_1': '2'}
+2026-05-16 15:26:07,071 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 200 | Duration: 0.0922s
+2026-05-16 15:26:07,073 | INFO | ROLLBACK
+2026-05-16 15:27:38,041 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0
+2026-05-16 15:27:38,049 | INFO | BEGIN (implicit)
+2026-05-16 15:27:38,051 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.age = %(age_1)s 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-16 15:27:38,052 | INFO | [generated in 0.00088s] {'age_1': 18, 'param_1': 10, 'param_2': 0}
+2026-05-16 15:27:38,056 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-16 15:27:38,057 | INFO | [cached since 90.99s ago] {'param_1': '1'}
+2026-05-16 15:27:38,060 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0197s
+2026-05-16 15:27:38,062 | INFO | ROLLBACK
+2026-05-16 15:27:45,882 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students/count
+2026-05-16 15:27:45,885 | INFO | BEGIN (implicit)
+2026-05-16 15:27:45,888 | INFO | SELECT count(*) AS count_1 
+FROM (SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students) AS anon_1
+2026-05-16 15:27:45,888 | INFO | [generated in 0.00042s] {}
+2026-05-16 15:27:45,891 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students/count | Status: 200 | Duration: 0.0088s
+2026-05-16 15:27:45,892 | INFO | ROLLBACK
+2026-05-16 15:27:59,310 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students/1
+2026-05-16 15:27:59,314 | INFO | BEGIN (implicit)
+2026-05-16 15:27:59,314 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:27:59,314 | INFO | [cached since 112.3s ago] {'student_id_1': '1', 'param_1': 1}
+2026-05-16 15:27:59,316 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-16 15:27:59,317 | INFO | [cached since 112.3s ago] {'param_1': '1'}
+2026-05-16 15:27:59,319 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students/1 | Status: 200 | Duration: 0.0085s
+2026-05-16 15:27:59,320 | INFO | ROLLBACK
+2026-05-16 15:28:45,625 | INFO | Incoming request: PUT http://127.0.0.1:8000/api/v1/students/2
+2026-05-16 15:28:45,629 | INFO | BEGIN (implicit)
+2026-05-16 15:28:45,630 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:28:45,631 | INFO | [cached since 158.6s ago] {'student_id_1': '2', 'param_1': 1}
+2026-05-16 15:28:45,633 | INFO | COMMIT
+2026-05-16 15:28:45,635 | INFO | BEGIN (implicit)
+2026-05-16 15:28:45,635 | INFO | SELECT students.student_id, students.name, students.age 
+FROM students 
+WHERE students.student_id = %(pk_1)s
+2026-05-16 15:28:45,636 | INFO | [cached since 158.6s ago] {'pk_1': '2'}
+2026-05-16 15:28:45,639 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-16 15:28:45,639 | INFO | [cached since 158.6s ago] {'param_1': '2'}
+2026-05-16 15:28:45,642 | INFO | Completed request: PUT http://127.0.0.1:8000/api/v1/students/2 | Status: 200 | Duration: 0.0163s
+2026-05-16 15:28:45,645 | INFO | ROLLBACK
+2026-05-16 15:29:19,146 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/courses
+2026-05-16 15:29:19,152 | INFO | BEGIN (implicit)
+2026-05-16 15:29:19,152 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-16 15:29:19,153 | INFO | [cached since 192.1s ago] {'student_id_1': '2', 'param_1': 1}
+2026-05-16 15:29:19,155 | INFO | INSERT INTO courses (course_id, title, student_id) VALUES (%(course_id)s, %(title)s, %(student_id)s)
+2026-05-16 15:29:19,156 | INFO | [generated in 0.00047s] {'course_id': '2', 'title': 'Business Administration', 'student_id': '2'}
+2026-05-16 15:29:19,158 | INFO | COMMIT
+2026-05-16 15:29:19,162 | INFO | BEGIN (implicit)
+2026-05-16 15:29:19,164 | INFO | SELECT courses.course_id, courses.title, courses.student_id 
+FROM courses 
+WHERE courses.course_id = %(pk_1)s
+2026-05-16 15:29:19,165 | INFO | [generated in 0.00094s] {'pk_1': '2'}
+2026-05-16 15:29:19,170 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/courses | Status: 200 | Duration: 0.0238s
+2026-05-16 15:29:19,171 | INFO | ROLLBACK
+2026-05-16 15:29:25,611 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users/me
+2026-05-16 15:29:25,614 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users/me | Status: 200 | Duration: 0.0030s
+2026-05-16 15:29:44,930 | INFO | Application shutting down...
+2026-05-16 15:29:46,524 | INFO | Application starting up...
+2026-05-16 15:30:58,952 | INFO | Application shutting down...
+2026-05-16 15:31:00,423 | INFO | Application starting up...
+2026-05-16 15:31:00,525 | INFO | Application shutting down...
