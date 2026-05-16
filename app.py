@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from db.database import Base, engine
 from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger

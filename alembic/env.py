@@ -6,6 +6,9 @@ from sqlalchemy import pool
 from alembic import context
 
 from db.database import Base
+from models.student import Student
+from models.course import Course
+from models.user import User
 from utils.config import settings
 
 # this is the Alembic Config object, which provides
