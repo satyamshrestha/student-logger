@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, BackgroundTasks
+from fastapi import APIRouter, Depends, BackgroundTasks, Request
 from sqlalchemy.orm import Session
 
 from db.deps import get_db
@@ -9,7 +9,7 @@ from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
 from utils.logger import logger
 from utils.tasks import send_welcome_email
-
+from utils.rate_limiter import limiter
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -36,7 +36,9 @@ def signup(
     return {"message": "User created successfully!"}
 
 @router.post("/login")
+@limiter.limit("3/minute")
 def login(
+    request: Request,
     data: UserLogin,
     db: Session = Depends(get_db)
 ):

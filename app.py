@@ -3,7 +3,11 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi import _rate_limit_exceeded_handler
 
+from utils.rate_limiter import limiter
 from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger
@@ -18,6 +22,23 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(api_router, prefix="/api/v1")
+
+app.state.limiter = limiter
+
+app.add_middleware(SlowAPIMiddleware)
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler
+)
 
 @app.get("/")
 def home():
@@ -41,15 +62,6 @@ async def log_requests(request: Request, call_next):
     )
 
     return response  
-
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
 
 # Global exception handler for AppException
 @app.exception_handler(AppException)
