@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from schemas.student_schema import CourseCreate, CourseResponse
@@ -6,11 +6,14 @@ from db.deps import get_db
 from services.courseservice import CourseService
 from services.deps import get_course_service
 from auth.permissions import require_permission
+from utils.rate_limiter import limiter
 
 router = APIRouter(prefix="/courses", tags=["Course"])
 
 @router.post("", response_model=CourseResponse)
+@limiter.limit("30/minute")
 def create_course(
+    request: Request,
     data: CourseCreate,
     db: Session = Depends(get_db),
     user: dict = Depends(require_permission("create")),

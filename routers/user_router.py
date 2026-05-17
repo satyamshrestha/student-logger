@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from models.user import User
@@ -9,15 +9,19 @@ from auth.permissions import require_permission
 from schemas.student_schema import RoleUpdate
 from services.userservice import UserService
 from services.deps import get_user_service
+from utils.rate_limiter import limiter
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/me")
-def get_me(user: dict = Depends(get_current_user)):
+@limiter.limit("100/minute")
+def get_me(request: Request, user: dict = Depends(get_current_user)):
     return user
 
 @router.get("")
+@limiter.limit("100/minute")
 def get_all_users(
+    request: Request,
     user: dict = Depends(require_permission("admin_only")),
     db: Session = Depends(get_db),
     service: UserService = Depends(get_user_service)
@@ -25,7 +29,9 @@ def get_all_users(
     return service.get_all_users(db)
 
 @router.put("/{username}/role")
+@limiter.limit("30/minute")
 def update_role(
+    request: Request,
     username: str,
     data: RoleUpdate,
     user: dict = Depends(require_permission("admin_only")),
