@@ -15,7 +15,8 @@ class StudentService():
         
         db.add(student)
         db.commit()
-        db.refresh(student)  
+        db.refresh(student)
+        redis_client.delete("all_students")  
         return student 
 
     def find_student(self, db, student_id: str) -> Student | None:
@@ -41,6 +42,7 @@ class StudentService():
         
         db.commit()
         db.refresh(student)
+        redis_client.delete("all_students")
         return student
     
     def count_students(self, db):
@@ -53,6 +55,7 @@ class StudentService():
         
         db.delete(student)
         db.commit()
+        redis_client.delete("all_students")
         return True
 
     def get_all_students(self, db, query):

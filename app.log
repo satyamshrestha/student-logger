@@ -751,3 +751,75 @@ WHERE courses.course_id = %(pk_1)s
 2026-05-18 14:39:29,183 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
 2026-05-18 14:39:29,191 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0078s
 2026-05-18 14:41:16,975 | INFO | Application shutting down...
+2026-05-18 14:44:58,633 | INFO | Application starting up...
+2026-05-18 14:44:59,003 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-18 14:44:59,006 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0027s
+2026-05-18 14:44:59,105 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-18 14:44:59,135 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0302s
+2026-05-18 14:45:11,807 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-18 14:45:11,887 | INFO | select pg_catalog.version()
+2026-05-18 14:45:11,887 | INFO | [raw sql] {}
+2026-05-18 14:45:11,888 | INFO | select current_schema()
+2026-05-18 14:45:11,889 | INFO | [raw sql] {}
+2026-05-18 14:45:11,890 | INFO | show standard_conforming_strings
+2026-05-18 14:45:11,890 | INFO | [raw sql] {}
+2026-05-18 14:45:11,892 | INFO | BEGIN (implicit)
+2026-05-18 14:45:11,894 | INFO | SELECT users.username AS users_username, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-18 14:45:11,895 | INFO | [generated in 0.00055s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-18 14:45:11,900 | INFO | Login attempt for user: satyam.
+2026-05-18 14:45:12,145 | INFO | User satyam logged in successfully.
+2026-05-18 14:45:12,147 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3402s
+2026-05-18 14:45:12,148 | INFO | ROLLBACK
+2026-05-18 14:45:30,876 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0
+2026-05-18 14:45:30,916 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0398s
+2026-05-18 14:45:39,538 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0
+2026-05-18 14:45:39,544 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0069s
+2026-05-18 14:45:54,575 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-18 14:45:54,586 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0110s
+2026-05-18 14:46:20,712 | INFO | Application shutting down...
+2026-05-18 14:46:22,691 | INFO | Application starting up...
+2026-05-18 14:46:27,257 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-18 14:46:27,444 | INFO | select pg_catalog.version()
+2026-05-18 14:46:27,445 | INFO | [raw sql] {}
+2026-05-18 14:46:27,446 | INFO | select current_schema()
+2026-05-18 14:46:27,447 | INFO | [raw sql] {}
+2026-05-18 14:46:27,448 | INFO | show standard_conforming_strings
+2026-05-18 14:46:27,448 | INFO | [raw sql] {}
+2026-05-18 14:46:27,450 | INFO | BEGIN (implicit)
+2026-05-18 14:46:27,452 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-18 14:46:27,452 | INFO | [generated in 0.00047s] {'param_1': 10, 'param_2': 0}
+2026-05-18 14:46:27,472 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-18 14:46:27,473 | INFO | [generated in 0.00076s] {'param_1': '1'}
+2026-05-18 14:46:27,477 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-18 14:46:27,478 | INFO | [cached since 0.00606s ago] {'param_1': '2'}
+2026-05-18 14:46:27,480 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-18 14:46:27,481 | INFO | [cached since 0.008739s ago] {'param_1': '3'}
+2026-05-18 14:46:27,482 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.2247s
+2026-05-18 14:46:27,484 | INFO | ROLLBACK
+2026-05-18 14:46:37,355 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0
+2026-05-18 14:46:37,360 | INFO | BEGIN (implicit)
+2026-05-18 14:46:37,362 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.age = %(age_1)s 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-18 14:46:37,363 | INFO | [generated in 0.00071s] {'age_1': 18, 'param_1': 10, 'param_2': 0}
+2026-05-18 14:46:37,369 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-18 14:46:37,370 | INFO | [cached since 9.898s ago] {'param_1': '1'}
+2026-05-18 14:46:37,374 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?age=18&order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0195s
+2026-05-18 14:46:37,376 | INFO | ROLLBACK
+2026-05-18 14:49:49,833 | INFO | Application shutting down...
+2026-05-18 14:49:51,793 | INFO | Application starting up...
+2026-05-18 15:10:22,772 | INFO | Application shutting down...
