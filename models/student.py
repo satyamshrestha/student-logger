@@ -9,3 +9,10 @@ class Student(Base):
     age = Column(Integer)
 
     courses = relationship("Course", back_populates="student")
+    
+    def to_dict(self):
+        return {
+            "student_id": self.student_id,
+            "name": self.name,
+            "age": self.age
+        }

@@ -1,3 +1,6 @@
+import json
+
+from db.redis import redis_client
 from models.student import Student
 from utils.exceptions import AppException
 
@@ -53,6 +56,10 @@ class StudentService():
         return True
 
     def get_all_students(self, db, query):
+        cached_students = redis_client.get("all_students")
+
+        if cached_students:
+            return json.loads(cached_students)
         q = db.query(Student)
         # Filtering
         if query.age is not None:
@@ -73,4 +80,11 @@ class StudentService():
                 q = q.order_by(Student.age)
     
         # Pagination
-        return q.offset(query.offset).limit(query.limit).all()
+        students = q.offset(query.offset).limit(query.limit).all()
+
+        redis_client.set(
+            "all_students",
+            json.dumps([student.to_dict() for student in students])
+        )
+
+        return students
