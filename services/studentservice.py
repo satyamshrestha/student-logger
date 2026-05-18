@@ -16,7 +16,7 @@ class StudentService():
         db.add(student)
         db.commit()
         db.refresh(student)
-        redis_client.delete("all_students")  
+        redis_client.flushdb()
         return student 
 
     def find_student(self, db, student_id: str) -> Student | None:
@@ -42,7 +42,7 @@ class StudentService():
         
         db.commit()
         db.refresh(student)
-        redis_client.delete("all_students")
+        redis_client.flushdb()
         return student
     
     def count_students(self, db):
@@ -55,12 +55,23 @@ class StudentService():
         
         db.delete(student)
         db.commit()
-        redis_client.delete("all_students")
+        redis_client.flushdb()
         return True
 
     def get_all_students(self, db, query):
-        cached_students = redis_client.get("all_students")
+        cache_key = (
+            f"students:"
+            f"name={query.name}:"
+            f"age={query.age}:"
+            f"min_age={query.min_age}:"
+            f"max_age={query.max_age}:"
+            f"sort={query.sort}:"
+            f"order={query.order}:"
+            f"offset={query.offset}:"
+            f"limit={query.limit}"
+        )
 
+        cached_students = redis_client.get(cache_key)
         if cached_students:
             return json.loads(cached_students)
         q = db.query(Student)
@@ -86,7 +97,7 @@ class StudentService():
         students = q.offset(query.offset).limit(query.limit).all()
 
         redis_client.set(
-            "all_students",
+            cache_key,
             json.dumps([student.to_dict() for student in students])
         )
 

@@ -13,5 +13,5 @@ class CourseService:
         db.add(course)
         db.commit()
         db.refresh(course)
-        redis_client.delete("all_students")
+        redis_client.flushdb()
         return course

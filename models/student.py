@@ -14,5 +14,12 @@ class Student(Base):
         return {
             "student_id": self.student_id,
             "name": self.name,
-            "age": self.age
+            "age": self.age,
+            "courses": [
+                {
+                    "course_id": course.course_id,
+                    "title": course.title
+                }
+                for course in self.courses
+            ]
         }
