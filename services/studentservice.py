@@ -1,10 +1,8 @@
 import json
-from fastapi import BackgroundTasks
 
 from db.redis import redis_client
 from models.student import Student
 from utils.exceptions import AppException
-from utils.audit import log_action
 
 class StudentService():
 
@@ -50,7 +48,7 @@ class StudentService():
     def count_students(self, db):
         return db.query(Student).count()
 
-    def delete_student(self, db, student_id: str, background_tasks: BackgroundTasks):
+    def delete_student(self, db, student_id: str):
         student = self.find_student(db, student_id)
         if not student:
             raise AppException(f"Student with ID {student_id} not found!", 404)
