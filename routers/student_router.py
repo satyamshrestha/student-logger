@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from services.deps import get_student_service
@@ -7,6 +7,7 @@ from schemas.student_schema import StudentCreate, StudentQuery, StudentResponse,
 from db.deps import get_db
 from auth.permissions import require_permission
 from utils.rate_limiter import limiter
+from utils.audit import log_action
 
 router = APIRouter(prefix="/students", tags=["Students"])
 
@@ -77,9 +78,14 @@ def update_student(
 def delete_student(
     request: Request,
     student_id: str,
+    background_tasks: BackgroundTasks,
     user: dict = Depends(require_permission("delete")),
     db: Session = Depends(get_db),
     service: StudentService = Depends(get_student_service)
 ):
     service.delete_student(db, student_id)
+    background_tasks.add_task(
+        log_action,
+        f"Admin updated the role of {user} to {user.role}."
+    )
     return {"message": "Deleted successfully"}

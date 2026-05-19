@@ -2,6 +2,9 @@ from utils.logger import logger
 import time
 
 def send_welcome_email(username: str):
-    time.sleep(5) # Simulating email sending.
+    try:
+        time.sleep(5) # Simulating email sending.
+        print(f"Welcome email sent to {username}")
 
-    logger.info(f"Sent welcome email to {username}!")
+    except Exception as e:
+        logger.error(f"Email sending failed: {str(e)}")

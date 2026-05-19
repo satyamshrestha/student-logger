@@ -56,10 +56,6 @@ class StudentService():
             raise AppException(f"Student with ID {student_id} not found!", 404)
         
         db.delete(student)
-        background_tasks.add_task(
-            log_action,
-            f"Deleted student with id {student_id}"
-        )
         db.commit()
         redis_client.flushdb()
         return True
