@@ -1160,3 +1160,79 @@ WHERE %(param_1)s = courses.student_id
 2026-05-19 17:49:29,982 | INFO | Application shutting down...
 2026-05-19 17:49:31,901 | INFO | Application starting up...
 2026-05-19 17:49:32,011 | INFO | Application shutting down...
+2026-05-19 17:51:50,240 | INFO | Application starting up...
+2026-05-19 17:51:54,225 | INFO | Incoming request: DELETE http://127.0.0.1:8000/api/v1/students/4
+2026-05-19 17:51:54,305 | INFO | select pg_catalog.version()
+2026-05-19 17:51:54,305 | INFO | [raw sql] {}
+2026-05-19 17:51:54,307 | INFO | select current_schema()
+2026-05-19 17:51:54,307 | INFO | [raw sql] {}
+2026-05-19 17:51:54,308 | INFO | show standard_conforming_strings
+2026-05-19 17:51:54,308 | INFO | [raw sql] {}
+2026-05-19 17:51:54,309 | INFO | BEGIN (implicit)
+2026-05-19 17:51:54,312 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-19 17:51:54,312 | INFO | [generated in 0.00042s] {'student_id_1': '4', 'param_1': 1}
+2026-05-19 17:51:54,317 | INFO | ROLLBACK
+2026-05-19 17:51:54,319 | INFO | Completed request: DELETE http://127.0.0.1:8000/api/v1/students/4 | Status: 404 | Duration: 0.0942s
+2026-05-19 17:52:12,446 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-19 17:52:12,473 | INFO | BEGIN (implicit)
+2026-05-19 17:52:12,474 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+ LIMIT %(param_1)s OFFSET %(param_2)s
+2026-05-19 17:52:12,475 | INFO | [generated in 0.00077s] {'param_1': 10, 'param_2': 0}
+2026-05-19 17:52:12,481 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-19 17:52:12,481 | INFO | [generated in 0.00074s] {'param_1': '1'}
+2026-05-19 17:52:12,486 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-19 17:52:12,487 | INFO | [cached since 0.006193s ago] {'param_1': '2'}
+2026-05-19 17:52:12,489 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-19 17:52:12,489 | INFO | [cached since 0.008596s ago] {'param_1': '3'}
+2026-05-19 17:52:12,494 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0478s
+2026-05-19 17:52:12,497 | INFO | ROLLBACK
+2026-05-19 17:52:19,556 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0
+2026-05-19 17:52:19,562 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/students?order=asc&limit=10&offset=0 | Status: 200 | Duration: 0.0067s
+2026-05-19 17:52:45,343 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/students
+2026-05-19 17:52:45,350 | INFO | BEGIN (implicit)
+2026-05-19 17:52:45,352 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-19 17:52:45,352 | INFO | [cached since 51.04s ago] {'student_id_1': '4', 'param_1': 1}
+2026-05-19 17:52:45,357 | INFO | INSERT INTO students (student_id, name, age) VALUES (%(student_id)s, %(name)s, %(age)s)
+2026-05-19 17:52:45,358 | INFO | [generated in 0.00080s] {'student_id': '4', 'name': 'string', 'age': 100}
+2026-05-19 17:52:45,364 | INFO | COMMIT
+2026-05-19 17:52:45,367 | INFO | BEGIN (implicit)
+2026-05-19 17:52:45,369 | INFO | SELECT students.student_id, students.name, students.age 
+FROM students 
+WHERE students.student_id = %(pk_1)s
+2026-05-19 17:52:45,370 | INFO | [generated in 0.00105s] {'pk_1': '4'}
+2026-05-19 17:52:45,376 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-19 17:52:45,377 | INFO | [cached since 32.9s ago] {'param_1': '4'}
+2026-05-19 17:52:45,380 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/students | Status: 200 | Duration: 0.0366s
+2026-05-19 17:52:45,381 | INFO | ROLLBACK
+2026-05-19 17:52:52,297 | INFO | Incoming request: DELETE http://127.0.0.1:8000/api/v1/students/4
+2026-05-19 17:52:52,301 | INFO | BEGIN (implicit)
+2026-05-19 17:52:52,302 | INFO | SELECT students.student_id AS students_student_id, students.name AS students_name, students.age AS students_age 
+FROM students 
+WHERE students.student_id = %(student_id_1)s 
+ LIMIT %(param_1)s
+2026-05-19 17:52:52,302 | INFO | [cached since 57.99s ago] {'student_id_1': '4', 'param_1': 1}
+2026-05-19 17:52:52,305 | INFO | SELECT courses.course_id AS courses_course_id, courses.title AS courses_title, courses.student_id AS courses_student_id 
+FROM courses 
+WHERE %(param_1)s = courses.student_id
+2026-05-19 17:52:52,306 | INFO | [cached since 39.83s ago] {'param_1': '4'}
+2026-05-19 17:52:52,309 | INFO | DELETE FROM students WHERE students.student_id = %(student_id)s
+2026-05-19 17:52:52,309 | INFO | [generated in 0.00039s] {'student_id': '4'}
+2026-05-19 17:52:52,312 | INFO | COMMIT
+2026-05-19 17:52:52,318 | INFO | Completed request: DELETE http://127.0.0.1:8000/api/v1/students/4 | Status: 200 | Duration: 0.0208s
+2026-05-19 17:52:52,320 | INFO | AUDIT: Deleted student with id 4.
+2026-05-19 17:53:35,653 | INFO | Application shutting down...

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from models.user import User
@@ -10,6 +10,7 @@ from schemas.student_schema import RoleUpdate
 from services.userservice import UserService
 from services.deps import get_user_service
 from utils.rate_limiter import limiter
+from utils.audit import log_action
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -34,8 +35,13 @@ def update_role(
     request: Request,
     username: str,
     data: RoleUpdate,
+    background_tasks: BackgroundTasks,
     user: dict = Depends(require_permission("admin_only")),
     db: Session = Depends(get_db),
     service: UserService = Depends(get_user_service)
 ):
+    background_tasks.add_task(
+        log_action,
+        f"Admin updated the role of {user} to {user.role}."
+    )
     return service.update_role(db, username, data)
