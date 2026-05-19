@@ -86,6 +86,6 @@ def delete_student(
     service.delete_student(db, student_id)
     background_tasks.add_task(
         log_action,
-        f"Admin updated the role of {user} to {user.role}."
+        f"Deleted student with id {student_id}."
     )
     return {"message": "Deleted successfully"}
