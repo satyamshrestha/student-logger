@@ -20,6 +20,13 @@ class StudentUpdate(BaseModel):
     name: str | None = None
     age: int | None = None
 
+class CourseResponse(BaseModel):
+    course_id: str
+    title: str
+
+    class Config:
+        from_attributes = True
+
 class StudentResponse(BaseModel):
     student_id: str
     name: str
@@ -33,13 +40,6 @@ class CourseCreate(BaseModel):
     course_id: str
     title: str
     student_id: str
-
-class CourseResponse(BaseModel):
-    course_id: str
-    title: str
-
-    class Config:
-        from_attributes = True
 
 class UserCreate(BaseModel):
     username: str
