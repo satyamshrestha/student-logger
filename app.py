@@ -68,5 +68,11 @@ async def log_requests(request: Request, call_next):
 def app_exception_handler(request: Request, exc: AppException):
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.message}
+        content={
+            "success": False,
+            "error": {
+                "type": exc.error_type,
+                "message": exc.message
+            }
+        }
     )
