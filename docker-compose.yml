@@ -19,7 +19,7 @@ services:
 
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: C0d3r30!
+      POSTGRES_PASSWORD: database123
       POSTGRES_DB: student_logger_db
 
     ports:

@@ -9,7 +9,7 @@ class StudentService():
     def add_student(self, db, data):
         existing_student = db.query(Student).filter(Student.student_id == data.student_id).first()
         if existing_student:
-            raise AppException(f"Student with ID {data.student_id} already exists", 400)
+            raise AppException(f"Student with ID {data.student_id} already exists", 409)
         
         student = Student(**data.model_dump())        
         

@@ -20,7 +20,7 @@ def signup(
     db: Session = Depends(get_db)
 ):
     if db.query(User).filter(User.username == data.username).first():
-        raise AppException(f"User {data.username} already exists!", 400)
+        raise AppException(f"User {data.username} already exists!", 409)
     user = User(
         username=data.username,
         password=hash_password(data.password),
