@@ -21,4 +21,13 @@ def create_course(
 ):
     return service.add_course(db, data)
 
+@router.get("", response_model=list[CourseResponse])
+@limiter.limit("100/minute")
+def view_all_courses(
+    request: Request,
+    db: Session = Depends(get_db),
+    user: dict = Depends(require_permission("read")),
+    service: CourseService = Depends(get_course_service)
+):
+    return service.get_all_courses(db)
 # MORE CRUD FEATURES CAN BE ADDED AND A SEPARATE SERVICES FILE CAN BE MADE, JUST LIKE STUDENT_SERVICE.

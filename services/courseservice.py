@@ -15,3 +15,6 @@ class CourseService:
         db.refresh(course)
         redis_client.flushdb()
         return course
+    
+    def get_all_courses(self, db):
+        return db.query(Course).all()

@@ -15,7 +15,7 @@ services:
         condition: service_started
 
   db:
-    image: postgres:18
+    image: postgres:17
 
     environment:
       POSTGRES_USER: postgres
@@ -24,6 +24,9 @@ services:
 
     ports:
       - "5432:5432"
+    
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -49,3 +52,5 @@ services:
 
     ports:
       - "6379:6379"
+volumes:
+  postgres_data:

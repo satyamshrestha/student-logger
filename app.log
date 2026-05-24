@@ -1236,3 +1236,9 @@ WHERE %(param_1)s = courses.student_id
 2026-05-19 17:52:52,318 | INFO | Completed request: DELETE http://127.0.0.1:8000/api/v1/students/4 | Status: 200 | Duration: 0.0208s
 2026-05-19 17:52:52,320 | INFO | AUDIT: Deleted student with id 4.
 2026-05-19 17:53:35,653 | INFO | Application shutting down...
+2026-05-24 16:43:48,651 | INFO | Application starting up...
+2026-05-24 16:43:50,258 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-24 16:43:50,261 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0022s
+2026-05-24 16:43:50,528 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-24 16:43:50,549 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0214s
+2026-05-24 16:44:02,931 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
