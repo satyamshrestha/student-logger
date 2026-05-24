@@ -24,7 +24,7 @@ def create_student(
 
 @router.get("", response_model=list[StudentResponse])
 @limiter.limit("100/minute")
-def view_all_students(
+async def view_all_students(
     request: Request,
     service: StudentService = Depends(get_student_service),
     db: Session = Depends(get_db),
@@ -35,7 +35,7 @@ def view_all_students(
 
 @router.get("/count")
 @limiter.limit("100/minute")
-def student_count(
+async def student_count(
     request: Request,
     db: Session = Depends(get_db),
     user: dict = Depends(require_permission("read")),
@@ -45,7 +45,7 @@ def student_count(
 
 @router.get("/{student_id}", response_model=StudentResponse)
 @limiter.limit("100/minute")
-def get_student(
+async def get_student(
     request: Request,
     student_id: str,
     db: Session = Depends(get_db),

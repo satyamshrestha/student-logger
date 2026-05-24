@@ -16,12 +16,12 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/me")
 @limiter.limit("100/minute")
-def get_me(request: Request, user: dict = Depends(get_current_user)):
+async def get_me(request: Request, user: dict = Depends(get_current_user)):
     return user
 
 @router.get("")
 @limiter.limit("100/minute")
-def get_all_users(
+async def get_all_users(
     request: Request,
     user: dict = Depends(require_permission("admin_only")),
     db: Session = Depends(get_db),
