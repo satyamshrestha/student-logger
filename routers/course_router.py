@@ -30,4 +30,4 @@ def view_all_courses(
     service: CourseService = Depends(get_course_service)
 ):
     return service.get_all_courses(db)
-# MORE CRUD FEATURES CAN BE ADDED AND A SEPARATE SERVICES FILE CAN BE MADE, JUST LIKE STUDENT_SERVICE.
+# MORE CRUD FEATURES TO COME
