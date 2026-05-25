@@ -19,10 +19,11 @@ def signup(
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
-    if db.query(User).filter(User.username == data.username).first():
-        raise AppException(f"User {data.username} already exists!", 409)
+    if db.query(User).filter(User.username == data.username).first() or db.query(User).filter(User.email == data.email).first():
+        raise AppException(f"User already exists!", 409)
     user = User(
         username=data.username,
+        email=data.email,
         password=hash_password(data.password),
         role="student"
     )
