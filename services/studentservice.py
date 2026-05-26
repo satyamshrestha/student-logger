@@ -3,6 +3,7 @@ import json
 from db.redis import redis_client
 from models.student import Student
 from utils.exceptions import AppException
+from utils.cache import invalidate_student_cache
 
 class StudentService():
 
@@ -16,7 +17,7 @@ class StudentService():
         db.add(student)
         db.commit()
         db.refresh(student)
-        redis_client.flushdb()
+        invalidate_student_cache()
         return student 
 
     def find_student(self, db, student_id: str) -> Student | None:
@@ -39,7 +40,7 @@ class StudentService():
         
         db.commit()
         db.refresh(student)
-        redis_client.flushdb()
+        invalidate_student_cache()
         return student
     
     def count_students(self, db):
@@ -47,12 +48,10 @@ class StudentService():
 
     def delete_student(self, db, student_id: str):
         student = self.find_student(db, student_id)
-        if not student:
-            raise AppException(f"Student with ID {student_id} not found!", 404)
-        
+
         db.delete(student)
         db.commit()
-        redis_client.flushdb()
+        invalidate_student_cache()
         return True
 
     def get_all_students(self, db, query):
@@ -96,7 +95,7 @@ class StudentService():
         students_data = [student.to_dict() for student in students]
         redis_client.set(
             cache_key,
-            json.dumps([student.to_dict() for student in students]),
+            json.dumps(students_data),
             ex=300
         )
 
