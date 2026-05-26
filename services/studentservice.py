@@ -30,9 +30,6 @@ class StudentService():
             raise AppException("No update data provided", 400)
         
         student = self.find_student(db, student_id)
-
-        if not student:
-            raise AppException(f"Student with ID {student_id} not found", 404)
         
         if name is not None:
             student.name = name
@@ -96,9 +93,11 @@ class StudentService():
         # Pagination
         students = q.offset(query.offset).limit(query.limit).all()
 
+        students_data = [student.to_dict() for student in students]
         redis_client.set(
             cache_key,
-            json.dumps([student.to_dict() for student in students])
+            json.dumps([student.to_dict() for student in students]),
+            ex=300
         )
 
-        return students
+        return students_data
