@@ -1619,3 +1619,113 @@ FROM users
 2026-05-26 09:50:31,467 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 200 | Duration: 0.0186s
 2026-05-26 09:50:31,471 | INFO | ROLLBACK
 2026-05-26 09:51:27,076 | INFO | Application shutting down...
+2026-05-27 08:56:51,985 | INFO | Application starting up...
+2026-05-27 08:57:02,736 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-27 08:57:02,738 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0023s
+2026-05-27 08:57:02,917 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-27 08:57:02,944 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0274s
+2026-05-27 08:57:15,476 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-27 08:57:15,559 | INFO | select pg_catalog.version()
+2026-05-27 08:57:15,560 | INFO | [raw sql] {}
+2026-05-27 08:57:15,565 | INFO | select current_schema()
+2026-05-27 08:57:15,566 | INFO | [raw sql] {}
+2026-05-27 08:57:15,570 | INFO | show standard_conforming_strings
+2026-05-27 08:57:15,571 | INFO | [raw sql] {}
+2026-05-27 08:57:15,574 | INFO | BEGIN (implicit)
+2026-05-27 08:57:15,580 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-27 08:57:15,581 | INFO | [generated in 0.00132s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-27 08:57:15,592 | INFO | Login attempt for user: satyam.
+2026-05-27 08:57:15,844 | INFO | User satyam logged in successfully.
+2026-05-27 08:57:15,846 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3705s
+2026-05-27 08:57:15,851 | INFO | ROLLBACK
+2026-05-27 08:58:02,587 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/signup
+2026-05-27 08:58:02,595 | INFO | BEGIN (implicit)
+2026-05-27 08:58:02,597 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-27 08:58:02,598 | INFO | [cached since 47.02s ago] {'username_1': 'testuser', 'param_1': 1}
+2026-05-27 08:58:02,604 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-05-27 08:58:02,605 | INFO | [generated in 0.00145s] {'email_1': 'testguy@gmail.com', 'param_1': 1}
+2026-05-27 08:58:02,885 | INFO | INSERT INTO users (username, email, role, password) VALUES (%(username)s, %(email)s, %(role)s, %(password)s)
+2026-05-27 08:58:02,886 | INFO | [generated in 0.00079s] {'username': 'testuser', 'email': 'testguy@gmail.com', 'role': 'student', 'password': '$2b$12$82esmPR2S3nLGrMx6ewf8usezjJJgNt5dSozhuif9llsQbP1GwvJm'}
+2026-05-27 08:58:02,889 | INFO | COMMIT
+2026-05-27 08:58:02,895 | INFO | BEGIN (implicit)
+2026-05-27 08:58:02,899 | INFO | SELECT users.username, users.email, users.role, users.password 
+FROM users 
+WHERE users.username = %(pk_1)s
+2026-05-27 08:58:02,900 | INFO | [generated in 0.00122s] {'pk_1': 'testuser'}
+2026-05-27 08:58:02,903 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 200 | Duration: 0.3154s
+2026-05-27 08:58:02,905 | INFO | ROLLBACK
+2026-05-27 09:00:34,890 | INFO | Application shutting down...
+2026-05-27 09:01:13,286 | INFO | Application starting up...
+2026-05-27 09:01:20,814 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-27 09:01:20,818 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0037s
+2026-05-27 09:01:21,075 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-27 09:01:21,102 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0267s
+2026-05-27 09:02:48,908 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-27 09:02:48,968 | INFO | select pg_catalog.version()
+2026-05-27 09:02:48,969 | INFO | [raw sql] {}
+2026-05-27 09:02:48,973 | INFO | select current_schema()
+2026-05-27 09:02:48,974 | INFO | [raw sql] {}
+2026-05-27 09:02:48,977 | INFO | show standard_conforming_strings
+2026-05-27 09:02:48,978 | INFO | [raw sql] {}
+2026-05-27 09:02:48,981 | INFO | BEGIN (implicit)
+2026-05-27 09:02:48,986 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-27 09:02:48,987 | INFO | [generated in 0.00135s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-27 09:02:48,994 | INFO | Login attempt for user: satyam.
+2026-05-27 09:02:49,235 | INFO | User satyam logged in successfully.
+2026-05-27 09:02:49,237 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3289s
+2026-05-27 09:02:49,240 | INFO | ROLLBACK
+2026-05-27 09:03:14,934 | INFO | Incoming request: GET http://127.0.0.1:8000/api/v1/users
+2026-05-27 09:03:14,955 | INFO | BEGIN (implicit)
+2026-05-27 09:03:14,957 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users
+2026-05-27 09:03:14,958 | INFO | [generated in 0.00108s] {}
+2026-05-27 09:03:14,960 | INFO | Completed request: GET http://127.0.0.1:8000/api/v1/users | Status: 200 | Duration: 0.0262s
+2026-05-27 09:03:14,966 | INFO | ROLLBACK
+2026-05-27 09:03:19,982 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/signup
+2026-05-27 09:03:19,988 | INFO | BEGIN (implicit)
+2026-05-27 09:03:19,989 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-27 09:03:19,990 | INFO | [cached since 31.01s ago] {'username_1': 'testuser', 'param_1': 1}
+2026-05-27 09:03:19,994 | INFO | ROLLBACK
+2026-05-27 09:03:19,998 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 409 | Duration: 0.0154s
+2026-05-27 09:04:30,440 | INFO | Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-27 09:04:30,442 | INFO | Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0017s
+2026-05-27 09:04:30,629 | INFO | Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-27 09:04:30,631 | INFO | Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0016s
+2026-05-27 09:04:50,513 | INFO | Incoming request: POST http://127.0.0.1:8000/api/v1/auth/signup
+2026-05-27 09:04:50,523 | INFO | BEGIN (implicit)
+2026-05-27 09:04:50,526 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-27 09:04:50,527 | INFO | [cached since 121.6s ago] {'username_1': 'testuser', 'param_1': 1}
+2026-05-27 09:04:50,538 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2026-05-27 09:04:50,539 | INFO | [generated in 0.00164s] {'email_1': 'testguy@gmail.com', 'param_1': 1}
+2026-05-27 09:04:50,852 | INFO | INSERT INTO users (username, email, role, password) VALUES (%(username)s, %(email)s, %(role)s, %(password)s)
+2026-05-27 09:04:50,853 | INFO | [generated in 0.00078s] {'username': 'testuser', 'email': 'testguy@gmail.com', 'role': 'student', 'password': '$2b$12$QbOZxhfOnUP48.UCFzTK.u6NjHMREHrADPmSwFDunfZk322KfzP9G'}
+2026-05-27 09:04:50,856 | INFO | COMMIT
+2026-05-27 09:04:50,863 | INFO | BEGIN (implicit)
+2026-05-27 09:04:50,867 | INFO | SELECT users.username, users.email, users.role, users.password 
+FROM users 
+WHERE users.username = %(pk_1)s
+2026-05-27 09:04:50,871 | INFO | [generated in 0.00390s] {'pk_1': 'testuser'}
+2026-05-27 09:04:50,876 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 200 | Duration: 0.3634s
+2026-05-27 09:04:50,880 | INFO | ROLLBACK
+2026-05-27 09:16:56,514 | INFO | Application shutting down...
