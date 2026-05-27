@@ -1,6 +1,8 @@
 from utils.logger import logger
 import time
+from celery_worker import celery
 
+@celery.task
 def send_welcome_email(username: str):
     try:
         time.sleep(5) # Simulating email sending.
