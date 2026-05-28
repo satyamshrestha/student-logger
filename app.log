@@ -1729,3 +1729,30 @@ WHERE users.username = %(pk_1)s
 2026-05-27 09:04:50,876 | INFO | Completed request: POST http://127.0.0.1:8000/api/v1/auth/signup | Status: 200 | Duration: 0.3634s
 2026-05-27 09:04:50,880 | INFO | ROLLBACK
 2026-05-27 09:16:56,514 | INFO | Application shutting down...
+2026-05-28 09:47:42,793 | INFO | Application starting up...
+2026-05-28 09:50:18,387 | INFO | Application shutting down...
+2026-05-28 09:50:43,600 | INFO | Application starting up...
+2026-05-28 09:53:32,562 | INFO | Application shutting down...
+2026-05-28 10:13:39,064 | INFO | Application starting up...
+2026-05-28 10:13:43,784 | INFO | [N/A] Incoming request: GET http://127.0.0.1:8000/docs
+2026-05-28 10:13:43,786 | INFO | [N/A] Completed request: GET http://127.0.0.1:8000/docs | Status: 200 | Duration: 0.0019s
+2026-05-28 10:13:43,899 | INFO | [N/A] Incoming request: GET http://127.0.0.1:8000/openapi.json
+2026-05-28 10:13:43,927 | INFO | [N/A] Completed request: GET http://127.0.0.1:8000/openapi.json | Status: 200 | Duration: 0.0277s
+2026-05-28 10:14:49,789 | INFO | [N/A] Incoming request: POST http://127.0.0.1:8000/api/v1/auth/login
+2026-05-28 10:14:49,894 | INFO | select pg_catalog.version()
+2026-05-28 10:14:49,895 | INFO | [raw sql] {}
+2026-05-28 10:14:49,901 | INFO | select current_schema()
+2026-05-28 10:14:49,902 | INFO | [raw sql] {}
+2026-05-28 10:14:49,905 | INFO | show standard_conforming_strings
+2026-05-28 10:14:49,906 | INFO | [raw sql] {}
+2026-05-28 10:14:49,909 | INFO | BEGIN (implicit)
+2026-05-28 10:14:49,915 | INFO | SELECT users.username AS users_username, users.email AS users_email, users.role AS users_role, users.password AS users_password 
+FROM users 
+WHERE users.username = %(username_1)s 
+ LIMIT %(param_1)s
+2026-05-28 10:14:49,916 | INFO | [generated in 0.00107s] {'username_1': 'satyam', 'param_1': 1}
+2026-05-28 10:14:49,929 | INFO | Login attempt for user: satyam.
+2026-05-28 10:14:50,172 | INFO | User satyam logged in successfully.
+2026-05-28 10:14:50,175 | INFO | [N/A] Completed request: POST http://127.0.0.1:8000/api/v1/auth/login | Status: 200 | Duration: 0.3856s
+2026-05-28 10:14:50,179 | INFO | ROLLBACK
+2026-05-28 10:17:04,816 | INFO | Application shutting down...

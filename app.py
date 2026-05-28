@@ -50,15 +50,12 @@ def home():
     return {"message": "API is running"}
 
 # Middleware
-from utils.logging_adapter import RequestLoggerAdapter
-from utils.logger import logger as base_logger
-
-
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
+    request_id = getattr(request.state, "request_id", "N/A")
     request_logger = RequestLoggerAdapter(
         base_logger,
-        {"request_id": request.state.request_id}
+        {"request_id": request_id}
     )
     start_time = time.time()
 
