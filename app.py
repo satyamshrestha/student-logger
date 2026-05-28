@@ -12,6 +12,8 @@ from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger
 from middleware.request_context import RequestContextMiddleware
+from utils.logging_adapter import RequestLoggerAdapter
+from utils.logger import logger as base_logger
 
 
 @asynccontextmanager
@@ -48,23 +50,30 @@ def home():
     return {"message": "API is running"}
 
 # Middleware
+from utils.logging_adapter import RequestLoggerAdapter
+from utils.logger import logger as base_logger
+
+
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
+    request_logger = RequestLoggerAdapter(
+        base_logger,
+        {"request_id": request.state.request_id}
+    )
     start_time = time.time()
 
-    logger.info(f"Incoming request: {request.method} {request.url}")
+    request_logger.info(f"Incoming request: {request.method} {request.url}")
 
     response = await call_next(request)
-
     duration = time.time() - start_time
 
-    logger.info(
+    request_logger.info(
         f"Completed request: {request.method} {request.url} | "
         f"Status: {response.status_code} | "
         f"Duration: {duration:.4f}s"
     )
 
-    return response  
+    return response
 
 # Global exception handler for AppException
 @app.exception_handler(AppException)
