@@ -11,6 +11,8 @@ from utils.rate_limiter import limiter
 from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger
+from middleware.request_context import RequestContextMiddleware
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -25,6 +27,7 @@ app.include_router(api_router, prefix="/api/v1")
 
 app.state.limiter = limiter
 
+app.add_middleware(RequestContextMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 # CORS
 app.add_middleware(
