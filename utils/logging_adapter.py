@@ -6,4 +6,8 @@ class RequestLoggerAdapter(logging.LoggerAdapter):
 
         request_id = self.extra.get("request_id", "N/A")
 
-        return f"[{request_id}] {msg}", kwargs
+        kwargs["extra"] = {
+            "request_id": request_id
+        }
+
+        return msg, kwargs

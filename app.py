@@ -27,8 +27,8 @@ app.include_router(api_router, prefix="/api/v1")
 
 app.state.limiter = limiter
 
-app.add_middleware(RequestContextMiddleware)
 app.add_middleware(LoggingMiddleware)
+app.add_middleware(RequestContextMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 # CORS
 app.add_middleware(
