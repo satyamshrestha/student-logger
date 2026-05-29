@@ -12,9 +12,7 @@ from utils.exceptions import AppException
 from api.v1.api import api_router
 from utils.logger import logger
 from middleware.request_context import RequestContextMiddleware
-from utils.logging_adapter import RequestLoggerAdapter
-from utils.logger import logger as base_logger
-
+from middleware.logging_middleware import LoggingMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,6 +28,7 @@ app.include_router(api_router, prefix="/api/v1")
 app.state.limiter = limiter
 
 app.add_middleware(RequestContextMiddleware)
+app.add_middleware(LoggingMiddleware)
 app.add_middleware(SlowAPIMiddleware)
 # CORS
 app.add_middleware(
@@ -48,29 +47,6 @@ app.add_exception_handler(
 @app.get("/")
 def home():
     return {"message": "API is running"}
-
-# Middleware
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    request_id = getattr(request.state, "request_id", "N/A")
-    request_logger = RequestLoggerAdapter(
-        base_logger,
-        {"request_id": request_id}
-    )
-    start_time = time.time()
-
-    request_logger.info(f"Incoming request: {request.method} {request.url}")
-
-    response = await call_next(request)
-    duration = time.time() - start_time
-
-    request_logger.info(
-        f"Completed request: {request.method} {request.url} | "
-        f"Status: {response.status_code} | "
-        f"Duration: {duration:.4f}s"
-    )
-
-    return response
 
 # Global exception handler for AppException
 @app.exception_handler(AppException)
