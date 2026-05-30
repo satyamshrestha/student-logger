@@ -95,8 +95,14 @@ def refresh_token(
             status_code=401,
             detail="Invalid refresh token!"
         )
+    
     username = payload.get("sub")
     role = payload.get("role")
+    if not username or not role:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid refresh token payload!"
+        )
     access_token = create_access_token(
         {
             "sub": username,
