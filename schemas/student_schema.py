@@ -52,3 +52,6 @@ class UserLogin(BaseModel):
 
 class RoleUpdate(BaseModel):
     role: Literal["admin", "teacher", "student"]
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
