@@ -42,6 +42,6 @@ def update_role(
 ):
     background_tasks.add_task(
         log_action,
-        f"Admin updated the role of {user} to {user.role}."
+        f"Admin updated the role of {username} to {data.role}."
     )
     return service.update_role(db, username, data)

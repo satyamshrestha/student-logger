@@ -1,7 +1,7 @@
 from models.student import Student
 from models.course import Course
 from utils.exceptions import AppException
-from db.redis import redis_client
+from utils.cache import invalidate_student_cache
 
 class CourseService:
     def add_course(self, db, data):
@@ -13,7 +13,7 @@ class CourseService:
         db.add(course)
         db.commit()
         db.refresh(course)
-        redis_client.flushdb()
+        invalidate_student_cache()
         return course
     
     def get_all_courses(self, db):

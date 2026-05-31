@@ -1,228 +1,328 @@
-# Student Logger Backend
+# Student Management API
 
-A backend project built with FastAPI while learning production-style backend engineering concepts.
-
-The project started as a simple CRUD API and gradually evolved into a more structured backend system with authentication, role-based access control, Redis caching, Dockerized deployment, migrations, logging, middleware, and testing.
+A production-style backend application built with FastAPI that demonstrates modern backend engineering practices including authentication, authorization, caching, rate limiting, asynchronous task processing, structured logging, Dockerized deployment, and PostgreSQL persistence.
 
 ---
 
-## What this project includes
+## Overview
 
-* FastAPI
-* PostgreSQL
-* SQLAlchemy ORM
-* Alembic migrations
-* JWT authentication
-* Role-based access control (RBAC)
-* Redis caching
-* Docker & Docker Compose
-* Background tasks
-* Logging middleware
-* Global exception handling
-* Rate limiting
-* Layered architecture
-* Basic testing with Pytest
+This project follows a layered architecture and is designed to simulate how a real-world backend service is structured and deployed.
+
+The application provides:
+
+- Student Management
+- Course Management
+- User Authentication
+- Role-Based Access Control
+- Redis Caching
+- Background Task Processing
+- Request Tracking & Logging
+- Rate Limiting
+- Dockerized Infrastructure
 
 ---
 
-## Project structure
+## Features
 
-```bash
-.
-├── alembic/
+### Authentication & Security
+
+- JWT Authentication
+- Access Tokens
+- Refresh Tokens
+- Password Hashing with bcrypt
+- Protected Endpoints
+- Role-Based Access Control (RBAC)
+
+Roles:
+
+- Admin
+- Teacher
+- Student
+
+Permissions:
+
+| Role | Permissions |
+|--------|-------------|
+| Admin | Create, Read, Update, Delete, Admin Only |
+| Teacher | Create, Read, Update |
+| Student | Read |
+
+---
+
+### Student Management
+
+- Create Student
+- Retrieve Student
+- Retrieve All Students
+- Update Student
+- Delete Student
+- Student Count Endpoint
+
+Advanced Query Features:
+
+- Pagination
+- Filtering
+- Search
+- Sorting
+
+---
+
+### Course Management
+
+- Create Course
+- View Courses
+- Student-Course Relationship
+
+---
+
+### Performance Optimization
+
+#### Redis Caching
+
+Student list queries are cached in Redis.
+
+Features:
+
+- Cache Key Generation
+- TTL Expiration
+- Targeted Cache Invalidation
+
+---
+
+### Rate Limiting
+
+Implemented using SlowAPI.
+
+Examples:
+
+- Login: 3 requests/minute
+- Student Creation: 30 requests/minute
+- Read Endpoints: 100 requests/minute
+
+---
+
+### Logging & Observability
+
+#### Request Logging
+
+Every request logs:
+
+- Request Method
+- URL
+- Response Status
+- Request Duration
+
+#### Request Tracking
+
+Each request receives a unique Request ID.
+
+Example:
+
+```
+2026-05-30 12:00:00 INFO [Request ID: abc123]
+Incoming request: GET /students
+```
+
+#### Audit Logging
+
+Sensitive actions are tracked:
+
+- Student Deletion
+- User Role Changes
+
+---
+
+### Background Tasks
+
+Implemented using Celery + Redis.
+
+Example:
+
+- Welcome Email Task
+
+Executed asynchronously without blocking API responses.
+
+---
+
+### Database
+
+#### PostgreSQL
+
+Primary relational database.
+
+#### SQLAlchemy ORM
+
+Used for:
+
+- Models
+- Relationships
+- CRUD Operations
+
+#### Alembic
+
+Used for:
+
+- Schema Migrations
+- Database Version Control
+
+---
+
+## Architecture
+
+```text
+Client
+   │
+   ▼
+FastAPI Application
+   │
+   ├── Authentication
+   ├── Authorization
+   ├── Middleware
+   ├── Services
+   ├── Database Layer
+   │
+   ├── PostgreSQL
+   ├── Redis Cache
+   │
+   └── Celery Worker
+          │
+          ▼
+     Background Tasks
+```
+
+---
+
+## Project Structure
+
+```text
+project/
+│
 ├── api/
 ├── auth/
 ├── db/
+├── middleware/
 ├── models/
 ├── routers/
 ├── schemas/
 ├── services/
 ├── tests/
 ├── utils/
+│
+├── alembic/
+│
 ├── app.py
-├── docker-compose.yml
+├── celery_worker.py
+├── tasks.py
 ├── Dockerfile
+├── docker-compose.yml
 └── requirements.txt
 ```
 
 ---
 
-## Architecture
+## Tech Stack
 
-The project follows a layered architecture approach.
+### Backend
 
-### Routers
+- FastAPI
+- Python
 
-Handle:
+### Database
 
-* endpoints
-* request validation
-* dependencies
-* responses
+- PostgreSQL
+- SQLAlchemy
+- Alembic
 
-### Services
+### Authentication
 
-Handle:
+- JWT
+- bcrypt
 
-* business logic
-* database operations
-* caching logic
+### Caching
 
-### Models
+- Redis
 
-Handle:
+### Background Processing
 
-* database tables
-* relationships
+- Celery
 
-### Schemas
+### Infrastructure
 
-Handle:
+- Docker
+- Docker Compose
+- pgAdmin
 
-* request/response validation
+### Testing
 
----
-
-## Authentication
-
-Authentication is implemented using JWT.
-
-### Signup flow
-
-1. User sends credentials
-2. Password is hashed using bcrypt
-3. User gets stored in PostgreSQL
-
-### Login flow
-
-1. User submits credentials
-2. Password is verified
-3. JWT access token is generated
-4. Protected routes use token verification
+- Pytest
 
 ---
 
-## RBAC (Role-Based Access Control)
+## Running the Project
 
-Supported roles:
-
-* admin
-* teacher
-* student
-
-Permissions are enforced through FastAPI dependencies.
-
-Example:
-
-```python
-Depends(require_permission("create"))
-```
-
----
-
-## Redis caching
-
-Student list responses are cached using Redis.
-
-Cache is automatically cleared after:
-
-* create
-* update
-* delete operations
-
----
-
-## Rate limiting
-
-Rate limiting is implemented using SlowAPI.
-
-Example:
-
-```python
-@limiter.limit("30/minute")
-```
-
----
-
-## Logging
-
-The project includes:
-
-* request logging
-* response logging
-* login logging
-* audit logging
-* error logging
-
-Logs are stored inside:
+### Clone Repository
 
 ```bash
-app.log
+git clone https://github.com/satyamshrestha/student-logger
+cd project
 ```
 
----
+### Configure Environment Variables
 
-## Running the project
+Create `.env`
 
-### Start containers
+```env
+SECRET_KEY=your-secret-key
+ALGORITHM=HS256
+DATABASE_URL=postgresql://postgres:password@db:5432/student_logger_db
+REDIS_URL=redis://redis:6379
+```
+
+### Start Services
 
 ```bash
 docker compose up --build
 ```
 
-### Run migrations
+### Run Database Migrations
 
 ```bash
-docker compose exec api alembic upgrade head
+alembic upgrade head
 ```
 
 ---
 
-## Environment variables
+## Available Services
 
-Example `.env`:
+### API
 
-```env
-SECRET_KEY=your-secret-key
-ALGORITHM=HS256
-DATABASE_URL=your-postgresql-url
-REDIS_URL=your-redis-url
+```
+http://localhost:8000
 ```
 
----
+### pgAdmin
 
-## Main endpoints
+```
+http://localhost:5050
+```
 
-### Auth
+### PostgreSQL
 
-| Method | Endpoint              |
-| ------ | --------------------- |
-| POST   | `/api/v1/auth/signup` |
-| POST   | `/api/v1/auth/login`  |
+```
+localhost:5432
+```
 
-### Students
+### Redis
 
-| Method | Endpoint                        |
-| ------ | ------------------------------- |
-| POST   | `/api/v1/students`              |
-| GET    | `/api/v1/students`              |
-| GET    | `/api/v1/students/{student_id}` |
-| PUT    | `/api/v1/students/{student_id}` |
-| DELETE | `/api/v1/students/{student_id}` |
-
-### Users
-
-| Method | Endpoint                        |
-| ------ | ------------------------------- |
-| GET    | `/api/v1/users/me`              |
-| GET    | `/api/v1/users`                 |
-| PUT    | `/api/v1/users/{username}/role` |
+```
+localhost:6379
+```
 
 ---
 
 ## Testing
 
-Run tests using:
+Run:
 
 ```bash
 pytest
@@ -230,39 +330,27 @@ pytest
 
 ---
 
-## What I learned building this
+## Concepts Demonstrated
 
-This project helped me understand:
-
-* backend architecture
-* dependency injection
-* authentication & authorization
-* database relationships
-* Redis caching
-* middleware flow
-* Dockerized development
-* API protection
-* migrations
-* service-layer design
-* production-style backend structure
-
----
-
-## Future improvements
-
-Things I plan to add later:
-
-* async SQLAlchemy
-* async Redis
-* refresh tokens
-* Celery workers
-* CI/CD pipelines
-* Kubernetes
-* cloud deployment
-* advanced testing setup
-* query optimization
+- FastAPI Architecture
+- Dependency Injection
+- JWT Authentication
+- Refresh Tokens
+- Role-Based Access Control
+- SQLAlchemy ORM
+- Alembic Migrations
+- PostgreSQL
+- Redis Caching
+- Cache Invalidation
+- Rate Limiting
+- Structured Logging
+- Request Tracking
+- Audit Logging
+- Background Task Processing
+- Celery Workers
+- Docker Deployment
+- API Testing
 
 ---
 
-Built while learning backend engineering and production API design.
--Satyam Shrestha
+Built to learn production-oriented backend engineering concepts and modern API development practices.
